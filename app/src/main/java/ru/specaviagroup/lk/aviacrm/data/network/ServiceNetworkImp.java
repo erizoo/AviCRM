@@ -36,7 +36,7 @@ public class ServiceNetworkImp implements ServiceNetwork {
     }
 
     @Override
-    public Observable<Response<ResponseToken>> checkToken(String userToken) {
+    public Observable<Response<Void>> checkToken(String userToken) {
         CheckToken checkToken = new CheckToken();
         try {
             checkToken.setToken(userToken.replaceAll("Bearer ", ""));

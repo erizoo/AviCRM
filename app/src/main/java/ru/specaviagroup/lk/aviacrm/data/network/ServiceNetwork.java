@@ -9,5 +9,5 @@ public interface ServiceNetwork {
 
     Observable<Response<ResponseInfo>> login(String login, String password);
 
-    Observable<Response<ResponseToken>> checkToken(String userToken);
+    Observable<Response<Void>> checkToken(String userToken);
 }

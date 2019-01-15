@@ -19,7 +19,7 @@ public interface ApiMethods {
                                              @Body RequestLogin requestLogin);
 
     @POST("token")
-    Observable<Response<ResponseToken>> checkToken(@Header ("Accept") String acceptHeader ,
+    Observable<Response<Void>> checkToken(@Header ("Accept") String acceptHeader ,
                                                    @Body CheckToken checkToken);
 
 }
