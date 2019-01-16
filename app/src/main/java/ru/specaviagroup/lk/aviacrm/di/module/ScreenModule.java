@@ -15,6 +15,9 @@ import ru.specaviagroup.lk.aviacrm.ui.login.LoginPresenterImpl;
 import ru.specaviagroup.lk.aviacrm.ui.login.SplashMvpView;
 import ru.specaviagroup.lk.aviacrm.ui.login.SplashPresenter;
 import ru.specaviagroup.lk.aviacrm.ui.login.SplashPresenterImpl;
+import ru.specaviagroup.lk.aviacrm.ui.main.MainMvpView;
+import ru.specaviagroup.lk.aviacrm.ui.main.MainPresenter;
+import ru.specaviagroup.lk.aviacrm.ui.main.MainPresenterImpl;
 
 @Module
 public class ScreenModule {
@@ -50,6 +53,12 @@ public class ScreenModule {
     @Provides
     @PerScreen
     SplashPresenter<SplashMvpView> provideSplashPresenter(SplashPresenterImpl<SplashMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerScreen
+    MainPresenter<MainMvpView> provideMainPresenter(MainPresenterImpl<MainMvpView> presenter) {
         return presenter;
     }
 }

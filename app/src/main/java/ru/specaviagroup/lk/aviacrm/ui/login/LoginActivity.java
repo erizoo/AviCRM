@@ -2,10 +2,11 @@ package ru.specaviagroup.lk.aviacrm.ui.login;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.EdgeEffect;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,10 @@ public class LoginActivity extends BaseActivity implements LoginMvpView{
     EditText login;
     @BindView(R.id.password)
     EditText password;
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
+    @BindView(R.id.enter_button)
+    Button buttonLogin;
 
     @Inject
     LoginPresenter<LoginMvpView> presenter;
@@ -36,11 +41,13 @@ public class LoginActivity extends BaseActivity implements LoginMvpView{
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_main;
+        return R.layout.login_activity;
     }
 
     @OnClick(R.id.enter_button)
     public void login(){
+        progressBar.setVisibility(View.VISIBLE);
+        buttonLogin.setText("");
         if (login.getText().toString().equals("")){
             Snackbar.make(password, "Введите логин", Snackbar.LENGTH_LONG).show();
         } else if(password.getText().toString().equals("")){
@@ -52,6 +59,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView{
 
     @Override
     public void badLogin(String message, Object o) {
+        progressBar.setVisibility(View.GONE);
+        buttonLogin.setText("ВОЙТИ");
         Snackbar.make(password, "Ошибка авторизации, попробуйте снова", Snackbar.LENGTH_LONG).show();
     }
 

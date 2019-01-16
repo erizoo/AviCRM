@@ -1,6 +1,6 @@
 package ru.specaviagroup.lk.aviacrm.data.network;
 
-import java.util.concurrent.ExecutorCompletionService;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,13 +8,14 @@ import io.reactivex.Observable;
 import retrofit2.Response;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
-import ru.specaviagroup.lk.aviacrm.data.models.ResponseToken;
 
 public class ServiceNetworkImp implements ServiceNetwork {
 
     private static final String TAG = ServiceNetworkImp.class.getSimpleName();
     private static final String ACCEPT_HEADER = "application/json";
+    private static final String EXPAND_OBJECT = "object";
 
     private ApiMethods apiMethods;
 
@@ -44,5 +45,10 @@ public class ServiceNetworkImp implements ServiceNetwork {
             checkToken.setToken("");
         }
         return apiMethods.checkToken(ACCEPT_HEADER, checkToken);
+    }
+
+    @Override
+    public Observable<List<ResponseFacility>> getFacility(String userToken) {
+        return apiMethods.getFacility(userToken, EXPAND_OBJECT);
     }
 }

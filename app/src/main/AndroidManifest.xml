@@ -4,6 +4,7 @@
     package="ru.specaviagroup.lk.aviacrm">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.qr.QrCodeScannerActivity" />
         <activity android:name=".ui.login.SplashActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

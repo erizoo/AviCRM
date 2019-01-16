@@ -33,11 +33,6 @@ public class SplashActivity extends BaseActivity implements SplashMvpView{
     @Override
     public void isSuccessfulToken() {
         Intent intent = new Intent(this, MainActivity.class);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         startActivity(intent);
         finish();
     }
