@@ -79,10 +79,21 @@ public class FacilityAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @SuppressLint("SetTextI18n")
         @Override
         public void onBind(int position) {
-            nameManufacturer.setText(responseFacilities.get(position).getObjectFacility().getName()
-                    + " " + responseFacilities.get(position).getObjectFacility().getObjectName());
-            address.setText(responseFacilities.get(position).getObjectFacility().getAdress());
-            numberPhone.setText(responseFacilities.get(position).getObjectFacility().getTelephone());
+            try {
+                nameManufacturer.setText( responseFacilities.get(position).getObjectFacility().getObjectName());
+            } catch (NullPointerException e){
+                nameManufacturer.setText("-");
+            }
+            try {
+                address.setText(responseFacilities.get(position).getObjectFacility().getAdress());
+            } catch (NullPointerException e){
+                address.setText("-");
+            }
+            try {
+                numberPhone.setText(responseFacilities.get(position).getObjectFacility().getTelephone());
+            } catch (NullPointerException e){
+                numberPhone.setText("-");
+            }
             layout.setOnClickListener(v -> {
                 callback.openQrScanner();
             });
