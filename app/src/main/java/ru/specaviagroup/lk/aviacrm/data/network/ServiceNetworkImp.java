@@ -10,12 +10,15 @@ import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
 
 public class ServiceNetworkImp implements ServiceNetwork {
 
     private static final String TAG = ServiceNetworkImp.class.getSimpleName();
     private static final String ACCEPT_HEADER = "application/json";
     private static final String EXPAND_OBJECT = "object";
+    private static final String EXPAND_TYPE= "type,box";
+    private static final String CONTENT_TYPE= "application/json; charset=UTF-8";
 
     private ApiMethods apiMethods;
 
@@ -50,5 +53,10 @@ public class ServiceNetworkImp implements ServiceNetwork {
     @Override
     public Observable<List<ResponseFacility>> getFacility(String userToken) {
         return apiMethods.getFacility(userToken, EXPAND_OBJECT);
+    }
+
+    @Override
+    public Observable<ResponseTrap> getTrapInfo(String userToken, String id) {
+        return apiMethods.getTrapInfo(userToken, ACCEPT_HEADER, CONTENT_TYPE, id, EXPAND_TYPE);
     }
 }

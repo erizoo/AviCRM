@@ -8,6 +8,7 @@ import retrofit2.Response;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseToken;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
 
 public interface ServiceNetwork {
 
@@ -16,4 +17,6 @@ public interface ServiceNetwork {
     Observable<Response<Void>> checkToken(String userToken);
 
     Observable<List<ResponseFacility>> getFacility(String userToken);
+
+    Observable<ResponseTrap> getTrapInfo(String userToken, String id);
 }
