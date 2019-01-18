@@ -6,4 +6,7 @@
     <color name="colorButton">#00bcd4</color>
     <color name="colorTextHint">#808080</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorButtonRed">#de443a</color>
+    <color name="colorButtonGreen">#12c10e</color>
+    <color name="colorGreen">#008000</color>
 </resources>

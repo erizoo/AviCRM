@@ -30,9 +30,9 @@
             android:layout_marginTop="50dp"
             android:drawableStart="@drawable/ic_male"
             android:drawablePadding="5dp"
-            android:ems="10"
+            android:ems="11"
             android:hint="@string/login"
-            android:text="admin@mail.ru"
+            android:text="Specaviagroup@mail.ru"
             tools:ignore="RtlSymmetry" />
 
         <EditText
@@ -43,7 +43,7 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/ic_key"
             android:drawablePadding="10dp"
-            android:ems="10"
+            android:ems="11"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:text="Admin123" />

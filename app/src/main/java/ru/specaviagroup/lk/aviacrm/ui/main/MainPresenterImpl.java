@@ -23,8 +23,13 @@ public class MainPresenterImpl<V extends MainMvpView> extends BasePresenter<V>
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                getMvpView()::getData,
-                                getMvpView()::error
+                                listResponse -> {
+                                    if (listResponse.isSuccessful()) {
+                                        getMvpView().getData(listResponse.body());
+                                    } else if (listResponse.code() == 401) {
+                                        getMvpView().error();
+                                    }
+                                }
                         )
         );
     }

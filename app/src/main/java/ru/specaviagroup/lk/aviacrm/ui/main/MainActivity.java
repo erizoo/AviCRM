@@ -18,6 +18,7 @@ import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.FacilityAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseActivity;
+import ru.specaviagroup.lk.aviacrm.ui.login.LoginActivity;
 import ru.specaviagroup.lk.aviacrm.ui.qr.QrCodeScannerActivity;
 
 public class MainActivity extends BaseActivity implements MainMvpView, FacilityAdapter.Callback{
@@ -62,8 +63,10 @@ public class MainActivity extends BaseActivity implements MainMvpView, FacilityA
     }
 
     @Override
-    public void error(Throwable throwable) {
-        Snackbar.make(recyclerView, "Ошибка получения данных", Snackbar.LENGTH_LONG).show();
+    public void error() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

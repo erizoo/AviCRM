@@ -32,7 +32,7 @@ public interface ApiMethods {
 
     // получение объектов
     @GET("revizor")
-    Observable<List<ResponseFacility>> getFacility(@Header("Authorization") String userToken,
+    Observable<Response<List<ResponseFacility>>> getFacility(@Header("Authorization") String userToken,
                                                    @Query("expand") String object);
 
     @GET("trap/{id}")

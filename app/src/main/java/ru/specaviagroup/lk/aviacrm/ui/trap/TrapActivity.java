@@ -1,20 +1,53 @@
 package ru.specaviagroup.lk.aviacrm.ui.trap;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
+import ru.specaviagroup.lk.aviacrm.ui.adapters.CheckAdapter;
+import ru.specaviagroup.lk.aviacrm.ui.adapters.FacilityAdapter;
+import ru.specaviagroup.lk.aviacrm.ui.adapters.PesticidesAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseActivity;
+import ru.specaviagroup.lk.aviacrm.ui.qr.QrCodeScannerActivity;
 
 public class TrapActivity extends BaseActivity implements TrapMvpView{
 
+    @BindView(R.id.point_value)
+    TextView pointInfo;
+    @BindView(R.id.area_value)
+    TextView areaInfo;
+    @BindView(R.id.check_rv)
+    RecyclerView recyclerViewCheck;
+    @BindView(R.id.change_rv)
+    RecyclerView recyclerViewChange;
+    @BindView(R.id.progress_layout)
+    ConstraintLayout constraintLayout;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     @Inject
     TrapPresenter<TrapMvpView> presenter;
+
+    private CheckAdapter checkAdapter;
+    private PesticidesAdapter pesticidesAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +59,19 @@ public class TrapActivity extends BaseActivity implements TrapMvpView{
         if (!id.equals("")){
             presenter.getTrapInfo(id);
         }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        LinearLayoutManager layoutManagerTwo = new LinearLayoutManager(getContext());
+        layoutManagerTwo.setOrientation(LinearLayoutManager.VERTICAL);
+
+        checkAdapter = new CheckAdapter();
+        recyclerViewCheck.setLayoutManager(layoutManager);
+        recyclerViewCheck.setAdapter(checkAdapter);
+
+        pesticidesAdapter = new PesticidesAdapter();
+        recyclerViewChange.setLayoutManager(layoutManagerTwo);
+        recyclerViewChange.setAdapter(pesticidesAdapter);
     }
 
     @Override
@@ -33,13 +79,38 @@ public class TrapActivity extends BaseActivity implements TrapMvpView{
         return R.layout.trap_activity;
     }
 
+    @OnClick(R.id.no_button)
+    public void clickNoButton(){
+        Intent intent = new Intent(this, QrCodeScannerActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @SuppressLint("SetTextI18n")
     @Override
     public void getData(ResponseTrap responseTrap) {
-        System.out.println();
+        checkAdapter.setItems(responseTrap.getResponseRevizor());
+        try {
+            pesticidesAdapter.setItems(responseTrap.getPesticides());
+        } catch (Exception e){ }
+        String name;
+        try {
+            DecimalFormat format = (DecimalFormat) NumberFormat.getNumberInstance(Locale.ENGLISH);
+            format.setMaximumFractionDigits(2);
+            name = format.format(responseTrap.getName().get(0).getName());
+        } catch (Exception e){
+            name = "-";
+        }
+        pointInfo.setText(responseTrap.getResponseBox().get(0).getArticleName() + " " + name
+                + " " + responseTrap.getResponseTypeTrap().get(0).getName());
+        areaInfo.setText(responseTrap.getResponseBox().get(0).getName());
+        progressBar.setVisibility(View.GONE);
+        constraintLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void error(Throwable throwable) {
-        System.out.println();
+        pointInfo.setText("-");
+        areaInfo.setText("-");
     }
 }

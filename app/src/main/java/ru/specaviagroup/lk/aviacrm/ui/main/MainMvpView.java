@@ -9,5 +9,5 @@ public interface MainMvpView extends MvpView {
 
     void getData(List<ResponseFacility> responseFacilities);
 
-    void error(Throwable throwable);
+    void error();
 }

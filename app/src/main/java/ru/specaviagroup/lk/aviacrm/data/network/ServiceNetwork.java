@@ -16,7 +16,7 @@ public interface ServiceNetwork {
 
     Observable<Response<Void>> checkToken(String userToken);
 
-    Observable<List<ResponseFacility>> getFacility(String userToken);
+    Observable<Response<List<ResponseFacility>>> getFacility(String userToken);
 
     Observable<ResponseTrap> getTrapInfo(String userToken, String id);
 }

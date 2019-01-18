@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -92,13 +93,18 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
     @Override
     public void handleResult(Result rawResult) {
         System.out.println();
-        final String result = rawResult.getText();
-        String[] strings = result.split("id=");
-        Log.d("QRCodeScanner", rawResult.getText());
-        Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
-        Intent browserIntent = new Intent(this, TrapActivity.class);
-        browserIntent.putExtra("TRAP_ID", strings[1]);
-        startActivity(browserIntent);
+        try {
+            final String result = rawResult.getText();
+            String[] strings = result.split("id=");
+            Log.d("QRCodeScanner", rawResult.getText());
+            Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
+            Intent browserIntent = new Intent(this, TrapActivity.class);
+            browserIntent.putExtra("TRAP_ID", strings[1]);
+            startActivity(browserIntent);
+            finish();
+        } catch (Exception e){
+            Snackbar.make(mScannerView, "Неверный штрихкод", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override

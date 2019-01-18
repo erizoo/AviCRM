@@ -1,14 +1,18 @@
 package ru.specaviagroup.lk.aviacrm.data.models;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ResponseBox {
 
     @SerializedName("id")
+    @Expose
     private int id;
     @SerializedName("name")
+    @Expose
     private String name;
     @SerializedName("article_name")
+    @Expose
     private String articleName;
 
     public int getId() {

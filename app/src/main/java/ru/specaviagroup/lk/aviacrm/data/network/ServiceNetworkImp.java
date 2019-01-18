@@ -51,7 +51,7 @@ public class ServiceNetworkImp implements ServiceNetwork {
     }
 
     @Override
-    public Observable<List<ResponseFacility>> getFacility(String userToken) {
+    public Observable<Response<List<ResponseFacility>>> getFacility(String userToken) {
         return apiMethods.getFacility(userToken, EXPAND_OBJECT);
     }
 
