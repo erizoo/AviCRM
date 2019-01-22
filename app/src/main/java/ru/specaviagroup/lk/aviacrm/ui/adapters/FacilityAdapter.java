@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseViewHolder;
-import ru.specaviagroup.lk.aviacrm.ui.main.MainActivity;
 
 public class FacilityAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -52,7 +51,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public interface Callback{
 
-        void openQrScanner();
+        void openQrScanner(Integer objectId);
     }
 
     public void setCallback(Callback callback) {
@@ -80,7 +79,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             try {
-                nameManufacturer.setText( responseFacilities.get(position).getObjectFacility().getObjectName());
+                nameManufacturer.setText(responseFacilities.get(position).getObjectFacility().getObjectName());
             } catch (NullPointerException e){
                 nameManufacturer.setText("-");
             }
@@ -95,7 +94,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 numberPhone.setText("-");
             }
             layout.setOnClickListener(v -> {
-                callback.openQrScanner();
+                callback.openQrScanner(responseFacilities.get(position).getObjectId());
             });
         }
     }

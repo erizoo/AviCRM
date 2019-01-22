@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="29dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/panel_inactive"
+    android:elevation="4dp"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/save_popup_button"
+            style="@style/AppTheme.Button.Popup"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_green"
+            android:text="@string/save"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/abort_popup_button"/>
+
+        <Button
+            android:id="@+id/abort_popup_button"
+            style="@style/AppTheme.Button.Popup"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_blue"
+            android:text="@string/abort"
+           android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Spinner
+            android:id="@+id/spinner_points"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/my_edit_text_border"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner_drugs"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/my_edit_text_border"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spinner_points"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/comments"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Комментарии"
+            android:paddingStart="20dp"
+            android:background="@drawable/my_edit_text_border"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/save_popup_button"
+            tools:ignore="RtlSymmetry" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

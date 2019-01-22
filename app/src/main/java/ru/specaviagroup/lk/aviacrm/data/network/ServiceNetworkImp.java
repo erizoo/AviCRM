@@ -11,6 +11,7 @@ import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseView;
 
 public class ServiceNetworkImp implements ServiceNetwork {
 
@@ -58,5 +59,10 @@ public class ServiceNetworkImp implements ServiceNetwork {
     @Override
     public Observable<ResponseTrap> getTrapInfo(String userToken, String id) {
         return apiMethods.getTrapInfo(userToken, ACCEPT_HEADER, CONTENT_TYPE, id, EXPAND_TYPE);
+    }
+
+    @Override
+    public Observable<List<String>> getView(String userToken, Integer objectId) {
+        return apiMethods.getView(userToken, objectId);
     }
 }

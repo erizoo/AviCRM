@@ -9,6 +9,7 @@ import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseToken;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseView;
 
 public interface ServiceNetwork {
 
@@ -19,4 +20,6 @@ public interface ServiceNetwork {
     Observable<Response<List<ResponseFacility>>> getFacility(String userToken);
 
     Observable<ResponseTrap> getTrapInfo(String userToken, String id);
+
+    Observable<List<String>> getView(String userToken, Integer objectId);
 }

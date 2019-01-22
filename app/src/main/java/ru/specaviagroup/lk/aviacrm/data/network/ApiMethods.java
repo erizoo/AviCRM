@@ -17,6 +17,7 @@ import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseToken;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseView;
 
 public interface ApiMethods {
 
@@ -41,4 +42,8 @@ public interface ApiMethods {
                                          @Header("Content-Type") String contentType,
                                          @Path("id") String id,
                                          @Query(value = "expand", encoded = true) String type);
+
+    @GET("fields/{id}")
+    Observable<List<String>> getView(@Header("Authorization") String userToken,
+                                     @Path("id") Integer objectId);
 }

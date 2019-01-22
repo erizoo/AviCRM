@@ -18,6 +18,9 @@ import ru.specaviagroup.lk.aviacrm.ui.login.SplashPresenterImpl;
 import ru.specaviagroup.lk.aviacrm.ui.main.MainMvpView;
 import ru.specaviagroup.lk.aviacrm.ui.main.MainPresenter;
 import ru.specaviagroup.lk.aviacrm.ui.main.MainPresenterImpl;
+import ru.specaviagroup.lk.aviacrm.ui.profile.ProfileMvpView;
+import ru.specaviagroup.lk.aviacrm.ui.profile.ProfilePresenter;
+import ru.specaviagroup.lk.aviacrm.ui.profile.ProfilePresenterImpl;
 import ru.specaviagroup.lk.aviacrm.ui.trap.TrapMvpView;
 import ru.specaviagroup.lk.aviacrm.ui.trap.TrapPresenter;
 import ru.specaviagroup.lk.aviacrm.ui.trap.TrapPresenterImpl;
@@ -68,6 +71,12 @@ public class ScreenModule {
     @Provides
     @PerScreen
     TrapPresenter<TrapMvpView> provideTrapPresenter(TrapPresenterImpl<TrapMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerScreen
+    ProfilePresenter<ProfileMvpView> provideProfilePresenter(ProfilePresenterImpl<ProfileMvpView> presenter) {
         return presenter;
     }
 }

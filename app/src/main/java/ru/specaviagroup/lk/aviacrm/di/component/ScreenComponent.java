@@ -6,6 +6,7 @@ import ru.specaviagroup.lk.aviacrm.di.module.ScreenModule;
 import ru.specaviagroup.lk.aviacrm.ui.login.LoginActivity;
 import ru.specaviagroup.lk.aviacrm.ui.login.SplashActivity;
 import ru.specaviagroup.lk.aviacrm.ui.main.MainActivity;
+import ru.specaviagroup.lk.aviacrm.ui.profile.ProfileActivity;
 import ru.specaviagroup.lk.aviacrm.ui.trap.TrapActivity;
 
 @PerScreen
@@ -18,5 +19,7 @@ public interface ScreenComponent {
 
     void inject(MainActivity activity);
 
-    void inject(TrapActivity trapActivity);
+    void inject(TrapActivity activity);
+
+    void inject(ProfileActivity activity);
 }

@@ -26,6 +26,7 @@ import ru.specaviagroup.lk.aviacrm.ui.adapters.CheckAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.FacilityAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.PesticidesAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseActivity;
+import ru.specaviagroup.lk.aviacrm.ui.profile.ProfileActivity;
 import ru.specaviagroup.lk.aviacrm.ui.qr.QrCodeScannerActivity;
 
 public class TrapActivity extends BaseActivity implements TrapMvpView{
@@ -48,16 +49,19 @@ public class TrapActivity extends BaseActivity implements TrapMvpView{
 
     private CheckAdapter checkAdapter;
     private PesticidesAdapter pesticidesAdapter;
+    private String trapId;
+    private Integer objectId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getScreenComponent().inject(this);
         presenter.onAttach(this);
-        String id = Objects.requireNonNull(getIntent().getExtras()).getString("TRAP_ID", "");
+        trapId = Objects.requireNonNull(getIntent().getExtras()).getString("TRAP_ID", "");
+        objectId = Objects.requireNonNull(getIntent().getExtras()).getInt("OBJECT_ID");
         System.out.println();
-        if (!id.equals("")){
-            presenter.getTrapInfo(id);
+        if (!trapId.equals("")){
+            presenter.getTrapInfo(trapId);
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -82,6 +86,14 @@ public class TrapActivity extends BaseActivity implements TrapMvpView{
     @OnClick(R.id.no_button)
     public void clickNoButton(){
         Intent intent = new Intent(this, QrCodeScannerActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @OnClick(R.id.yes_button)
+    public void clickYesButton(){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("OBJECT_ID", objectId);
         startActivity(intent);
         finish();
     }

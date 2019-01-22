@@ -1,11 +1,10 @@
 package ru.specaviagroup.lk.aviacrm.ui.qr;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 
+import java.util.Objects;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import ru.specaviagroup.lk.aviacrm.ui.trap.TrapActivity;
 
@@ -30,11 +31,18 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
+    private Integer objectId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        try {
+            objectId = Objects.requireNonNull(getIntent().getExtras()).getInt("OBJECT_ID");
+            SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putInt("OBJECT_ID", objectId);
+            ed.apply();
+        } catch (Exception ignored) {}
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
@@ -100,6 +108,7 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
             Log.d("QRCodeScanner", rawResult.getBarcodeFormat().toString());
             Intent browserIntent = new Intent(this, TrapActivity.class);
             browserIntent.putExtra("TRAP_ID", strings[1]);
+            browserIntent.putExtra("OBJECT_ID", objectId);
             startActivity(browserIntent);
             finish();
         } catch (Exception e){
