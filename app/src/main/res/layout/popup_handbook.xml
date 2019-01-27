@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f4f7f6">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/popup_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/popup_save_button"
+        android:layout_width="280dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button_dark_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="сохранить"
+        android:textColor="#FFFFFF"
+        android:textSize="15.33sp" />
+
+</android.support.constraint.ConstraintLayout>

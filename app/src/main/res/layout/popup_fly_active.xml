@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="29dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/panel_inactive"
+    android:elevation="4dp"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_fly_active"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/my_edit_text_border"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <Button
+                android:id="@+id/save_popup_button"
+                style="@style/AppTheme.Button.Popup"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_green"
+                android:text="@string/save"
+                app:layout_constraintTop_toBottomOf="@+id/swifts" />
+
+            <Button
+                android:id="@+id/abort_popup_button"
+                style="@style/AppTheme.Button.Popup"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_blue"
+                android:text="@string/abort"
+                app:layout_constraintTop_toBottomOf="@+id/save_popup_button" />
+
+            <TextView
+                android:id="@+id/seagulls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:text="Чайки"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_fly_active" />
+
+            <TextView
+                android:id="@+id/sparrows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Воробьи"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seagulls" />
+
+            <TextView
+                android:id="@+id/crows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Вороны"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sparrows" />
+
+            <TextView
+                android:id="@+id/pigeons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Голуби"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/crows" />
+
+            <TextView
+                android:id="@+id/rooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Грачи"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pigeons" />
+
+            <TextView
+                android:id="@+id/swallows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Ласточки"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rooks" />
+
+            <TextView
+                android:id="@+id/magpies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Сороки"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/swallows" />
+
+            <TextView
+                android:id="@+id/swifts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Стрижи"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/magpies" />
+
+
+            <EditText
+                android:id="@+id/seagulls_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/seagulls"
+                app:layout_constraintTop_toTopOf="@+id/seagulls" />
+
+            <EditText
+                android:id="@+id/sparrows_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/sparrows"
+                app:layout_constraintTop_toTopOf="@+id/sparrows" />
+
+            <EditText
+                android:id="@+id/crows_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/crows"
+                app:layout_constraintTop_toTopOf="@+id/crows"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/pigeons_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/pigeons"
+                app:layout_constraintTop_toTopOf="@+id/pigeons" />
+
+            <EditText
+                android:id="@+id/rooks_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/rooks"
+                app:layout_constraintTop_toTopOf="@+id/rooks" />
+
+            <EditText
+                android:id="@+id/swallows_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/swallows"
+                app:layout_constraintTop_toTopOf="@+id/swallows"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/magpies_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/magpies"
+                app:layout_constraintTop_toTopOf="@+id/magpies" />
+
+            <EditText
+                android:id="@+id/swifts_value"
+                style="@style/AppTheme.EditText.Profile"
+                android:hint="0"
+                app:layout_constraintStart_toEndOf="@id/swifts"
+                app:layout_constraintTop_toTopOf="@+id/swifts" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

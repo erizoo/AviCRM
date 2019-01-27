@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f4f7f6">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,642 +17,716 @@
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/first_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
-                <TextView
+                <Button
                     android:id="@+id/title_first"
+                    style="@style/AppTheme.Button.Blue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Мониторинг летающих насекомых"
-                    android:textColor="@color/colorGreen"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/layout_detail_insects"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    android:text="Мониторинг летающих насекомых"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/first_layout_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/panel_white"
-                    android:orientation="vertical"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/title_first">
 
-                    <TextView
-                        android:id="@+id/title_pest_activity"
+                    <!--АКТИВНОСТЬ ГРЫЗУНОВ-->
+                    <RelativeLayout
+                        android:id="@+id/title_layout_active"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Есть активность вредителей ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_height="70dp"
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/yes_pest_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_pest_activity"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="14dp"
-                        android:text="ДА" />
+                        <TextView
+                            android:id="@+id/title_textview_active"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Есть активность вредителей?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
 
-                    <RadioButton
-                        android:id="@+id/no_pest_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_pest_activity"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
+                        <TextView
+                            android:id="@+id/title_editText_link_active"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_toEndOf="@+id/title_textview_active"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="3"
+                            android:textSize="13sp" />
 
-                </RelativeLayout>
+                        <CheckBox
+                            android:id="@+id/checkbox_active_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview_active"
+                            android:layout_alignStart="@+id/title_textview_active"
 
-                <RelativeLayout
-                    android:id="@+id/layout_replacement_glue"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_detail_insects">
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_active_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview_active"
+                            android:layout_alignEnd="@+id/title_textview_active"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_active_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                    <!--ПРЕПАРАТ-->
+                    <RelativeLayout
+                        android:id="@+id/title_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/title_layout_active">
+
+                        <TextView
+                            android:id="@+id/title_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Производилась замена клеевых ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/title_editText_link"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/title_textview"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/title_textview"
+                            android:backgroundTint="@android:color/transparent"
+                            android:textColor="@color/colorGreen"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_preparation_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview"
+                            android:layout_alignStart="@+id/title_textview"
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_preparation_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview"
+                            android:layout_alignEnd="@+id/title_textview"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_preparation_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/title_replacement_glue"
-                        android:layout_width="match_parent"
+                        android:id="@+id/active_comments"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Производилась замена клеевых ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_marginBottom="10dp"
+                        android:text="Коментарий"
+                        app:layout_constraintBottom_toTopOf="@+id/editText"
+                        app:layout_constraintStart_toStartOf="@+id/editText"
+                        app:layout_constraintTop_toBottomOf="@+id/title_layout" />
 
-                    <RadioButton
-                        android:id="@+id/yes_replacement_glue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_replacement_glue"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="4dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_replacement_glue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_replacement_glue"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_needs_repair"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_replacement_glue">
-
-                    <TextView
-                        android:id="@+id/title_needs_repair"
+                    <EditText
+                        android:id="@+id/editText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Требует ремонт ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/my_edit_text_border"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        android:maxLines="4"
+                        android:paddingStart="10dp"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@+id/active_comments"
+                        tools:ignore="RtlSymmetry" />
 
-                    <RadioButton
-                        android:id="@+id/yes_needs_repair"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_needs_repair"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="14dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_needs_repair"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_needs_repair"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
+                </android.support.constraint.ConstraintLayout>
 
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/second_layout"
+                android:id="@+id/street_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/first_layout">
 
-                <TextView
-                    android:id="@+id/title_second"
+                <Button
+                    android:id="@+id/title_street_area"
+                    style="@style/AppTheme.Button.Blue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Мониторинг грызунов и ползающих насекомых в помещениях"
-                    android:textColor="@color/colorGreen"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/layout_insects_in_rooms"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/title_second">
-
-                    <TextView
-                        android:id="@+id/title_captured_pests"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Есть отловленные вредители ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_captured_pests"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_captured_pests"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="14dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_captured_pests"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_captured_pests"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_replacement"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_insects_in_rooms">
-
-                    <TextView
-                        android:id="@+id/title_replacement"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Производилась замена клеевых ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_replacement"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_replacement"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="4dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_replacement"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_replacement"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_product_damage"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_replacement">
-
-                    <TextView
-                        android:id="@+id/title_product_damage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Выявлено повреждение продуктов и других предметов ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_product_damage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_product_damage"
-                        android:layout_alignParentBottom="true"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_product_damage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_product_damage"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/third_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/second_layout">
-
-                <TextView
-                    android:id="@+id/title_third"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Контроль Птиц"
-                    android:textColor="@color/colorGreen"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/layout_street_area"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/title_third">
-
-                    <TextView
-                        android:id="@+id/title_bird_activity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Присутствуют погрызы ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_bird_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_bird_activity"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="14dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_bird_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_bird_activity"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_catching_birds"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_street_area">
-
-                    <TextView
-                        android:id="@+id/title_catching_birds"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Производилась замена приманки ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_catching_birds"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_catching_birds"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="4dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_catching_birds"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_catching_birds"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layout_fourth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/third_layout">
-
-                <TextView
-                    android:id="@+id/title_fourth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Контроль ВХЗ"
-                    android:textColor="@color/colorGreen"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/layout_pest_active"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/title_fourth">
-
-                    <TextView
-                        android:id="@+id/title_pest_active"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Есть активность вредителей ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_pest_active"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_pest_active"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="14dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_pest_active"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_pest_active"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_replacement_glue_have"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_pest_active">
-
-                    <TextView
-                        android:id="@+id/title_replacement_glue_have"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Производилась замена клеевых ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_replacement_glue_have"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_replacement_glue_have"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="4dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_replacement_glue_have"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_replacement_glue_have"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_replacement_feramon"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_replacement_glue_have">
-
-                    <TextView
-                        android:id="@+id/title_replacement_feramon"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Производилась замена ферамона ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/yes_replacement_feramon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_replacement_feramon"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="4dp"
-                        android:text="ДА" />
-
-                    <RadioButton
-                        android:id="@+id/no_replacement_feramon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_replacement_feramon"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
-
-                </RelativeLayout>
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layout_five"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/third_layout">
-
-                <TextView
-                    android:id="@+id/title_five"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:text="Мониторинг Уличная территория"
-                    android:textColor="@color/colorGreen"
-                    android:textStyle="bold" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <RelativeLayout
-                    android:id="@+id/layout_are_bites"
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/street_area_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="250dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/title_five">
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@+id/title_street_area">
+
+                    <!--ПОГРЫЗЫ-->
+                    <RelativeLayout
+                        android:id="@+id/title_layout_bites"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_textview_bites"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Присутствуют погрызы ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/title_editText_link_bites"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_toEndOf="@+id/title_textview_bites"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="3"
+                            android:textSize="13sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_bites_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview_bites"
+                            android:layout_alignStart="@+id/title_textview_bites"
+
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_bites_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview_bites"
+                            android:layout_alignEnd="@+id/title_textview_bites"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_bites_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                    <!--ЗАМЕНА ПРИМАНКИ-->
+                    <RelativeLayout
+                        android:id="@+id/title_layout_bait_replacement"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/title_layout_bites">
+
+                        <TextView
+                            android:id="@+id/title_textview_bait_replacement"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Производилась замена приманки ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/value_bait_replacement"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/title_textview_bait_replacement"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/title_textview_bait_replacement"
+                            android:backgroundTint="@android:color/transparent"
+                            android:textColor="@color/colorGreen"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_bait_replacement_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview_bait_replacement"
+                            android:layout_alignStart="@+id/title_textview_bait_replacement"
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_bait_replacement_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_textview_bait_replacement"
+                            android:layout_alignEnd="@+id/title_textview_bait_replacement"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_bait_replacement_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/title_are_bites"
-                        android:layout_width="match_parent"
+                        android:id="@+id/street_area_comments"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Присутствуют погрызы ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_marginBottom="10dp"
+                        android:text="Коментарий"
+                        app:layout_constraintBottom_toTopOf="@+id/street_area_comments_value"
+                        app:layout_constraintStart_toStartOf="@+id/street_area_comments_value"
+                        app:layout_constraintTop_toBottomOf="@+id/title_layout_bait_replacement" />
 
-                    <RadioButton
-                        android:id="@+id/yes_are_bites"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_are_bites"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="14dp"
-                        android:text="ДА" />
+                    <EditText
+                        android:id="@+id/street_area_comments_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/my_edit_text_border"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        android:maxLines="4"
+                        android:paddingStart="10dp"
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@+id/street_area_comments"
+                        tools:ignore="RtlSymmetry" />
 
-                    <RadioButton
-                        android:id="@+id/no_are_bites"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_are_bites"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
+                </android.support.constraint.ConstraintLayout>
 
-                </RelativeLayout>
+            </android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
-                    android:id="@+id/layout_replacement_bite"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/vcs_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/street_layout">
+
+                <Button
+                    android:id="@+id/title_vcs_control"
+                    style="@style/AppTheme.Button.Blue"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:text="Контроль ВХЗ"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/vcs_control_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/panel_white"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_are_bites">
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@+id/title_vcs_control">
 
-                    <TextView
-                        android:id="@+id/title_replacement_bite"
+                    <!--Есть активность вредителей ?-->
+                    <RelativeLayout
+                        android:id="@+id/vcs_control_layout_active"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Производилась замена приманки ?"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_height="70dp"
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/yes_replacement_bite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@id/title_replacement_bite"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="4dp"
-                        android:text="ДА" />
+                        <TextView
+                            android:id="@+id/title_vcs_control_active"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Есть активность вредителей ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
 
-                    <RadioButton
-                        android:id="@+id/no_replacement_bite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/yes_replacement_bite"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="63dp"
-                        android:text="НЕТ" />
+                        <TextView
+                            android:id="@+id/vcs_control_active_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_toEndOf="@+id/title_vcs_control_active"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="3"
+                            android:textSize="13sp" />
 
-                </RelativeLayout>
+                        <CheckBox
+                            android:id="@+id/checkbox_vcs_control_active_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_vcs_control_active"
+                            android:layout_alignStart="@+id/title_vcs_control_active"
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_vcs_control_active_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_vcs_control_active"
+                            android:layout_alignEnd="@+id/title_vcs_control_active"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_vcs_control_active_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                    <!--ЗАМЕНА ПРИМАНКИ-->
+                    <RelativeLayout
+                        android:id="@+id/vcs_control_replacement_glue_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/vcs_control_layout_active">
+
+                        <TextView
+                            android:id="@+id/title_vcs_control_replacement_glue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Производилась замена клеевых ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/value_vcs_control_replacement_glue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/title_vcs_control_replacement_glue"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/title_vcs_control_replacement_glue"
+                            android:backgroundTint="@android:color/transparent"
+                            android:textColor="@color/colorGreen"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_vcs_control_replacement_glue_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_vcs_control_replacement_glue"
+                            android:layout_alignStart="@+id/title_vcs_control_replacement_glue"
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_vcs_control_replacement_glue_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_vcs_control_replacement_glue"
+                            android:layout_alignEnd="@+id/title_vcs_control_replacement_glue"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_vcs_control_replacement_glue_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/vcs_control_replacement_feramon_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/vcs_control_replacement_glue_layout">
+
+                        <TextView
+                            android:id="@+id/title_vcs_control_replacement_feramon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Производилась замена ферамона ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/value_vcs_control_replacement_feramon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/title_vcs_control_replacement_feramon"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/title_vcs_control_replacement_feramon"
+                            android:backgroundTint="@android:color/transparent"
+                            android:textColor="@color/colorGreen"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_vcs_control_replacement_feramon_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_vcs_control_replacement_feramon"
+                            android:layout_alignStart="@+id/title_vcs_control_replacement_feramon"
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_vcs_control_replacement_feramon_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_vcs_control_replacement_feramon"
+                            android:layout_alignEnd="@+id/title_vcs_control_replacement_feramon"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_vcs_control_replacement_feramon_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/fly_control_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/vcs_control_layout">
+
+                <Button
+                    android:id="@+id/title_fly_control"
+                    style="@style/AppTheme.Button.Blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Контроль птиц"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/fly_control_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/panel_white"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@+id/title_fly_control">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/fly_control_layout_active"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_fly_control_active"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Есть активность птиц ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_fly_control_active_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="да"
+                            android:textAllCaps="true"
+                            app:layout_constraintStart_toStartOf="@+id/title_fly_control_active"
+                            app:layout_constraintTop_toBottomOf="@+id/title_fly_control_active" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_fly_control_active_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="нет"
+                            android:textAllCaps="true"
+                            app:layout_constraintEnd_toEndOf="@+id/title_fly_control_active"
+                            app:layout_constraintTop_toBottomOf="@+id/title_fly_control_active" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_fly_control_active"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toBottomOf="@+id/checkbox_fly_control_active_yes" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                        <ImageView
+                            android:id="@+id/plus_fly_control_active"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toEndOf="@id/checkbox_fly_control_active_no"
+                            app:layout_constraintTop_toTopOf="@+id/checkbox_fly_control_active_no"
+                            app:srcCompat="@drawable/ic_plus" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/fly_control_catching_birds_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/fly_control_layout_active">
+
+                        <TextView
+                            android:id="@+id/title_fly_control_catching_birds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Проводился отлов птиц ?"
+                            android:textAllCaps="true"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/value_fly_control_catching_birds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/title_fly_control_catching_birds"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/title_fly_control_catching_birds"
+                            android:backgroundTint="@android:color/transparent"
+                            android:textColor="@color/colorGreen"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_fly_control_catching_birds_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_fly_control_catching_birds"
+                            android:layout_alignStart="@+id/title_fly_control_catching_birds"
+                            android:text="да"
+                            android:textAllCaps="true" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_fly_control_catching_birds_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title_fly_control_catching_birds"
+                            android:layout_alignEnd="@+id/title_fly_control_catching_birds"
+                            android:text="нет"
+                            android:textAllCaps="true" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/checkbox_fly_control_catching_birds_yes"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                </android.support.constraint.ConstraintLayout>
 
             </android.support.constraint.ConstraintLayout>
 

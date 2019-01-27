@@ -9,4 +9,6 @@
     <color name="colorButtonRed">#de443a</color>
     <color name="colorButtonGreen">#12c10e</color>
     <color name="colorGreen">#008000</color>
+    <color name="colorButtonBlue">#0089b6</color>
+    <color name="colorDivider">#eceeef</color>
 </resources>

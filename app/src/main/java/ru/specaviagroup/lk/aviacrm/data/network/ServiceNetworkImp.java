@@ -6,12 +6,15 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
+import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseSaveFlyActive;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
-import ru.specaviagroup.lk.aviacrm.data.models.ResponseView;
+import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
 
 public class ServiceNetworkImp implements ServiceNetwork {
 
@@ -64,5 +67,25 @@ public class ServiceNetworkImp implements ServiceNetwork {
     @Override
     public Observable<List<String>> getView(String userToken, Integer objectId) {
         return apiMethods.getView(userToken, objectId);
+    }
+
+    @Override
+    public Observable<List<ResponsePoint>> getPoints(String userToken, Integer objectId) {
+        return apiMethods.getPoints(userToken, objectId);
+    }
+
+    @Override
+    public Observable<Response<ResponseSaveFlyActive>> saveFlyActive(String userToken, RequestFlyActive requestFlyActive, int objectId) {
+        return apiMethods.saveFlyActive(userToken, requestFlyActive, objectId);
+    }
+
+    @Override
+    public Observable<List<ResponseHandBook>> getPreparation(String userToken, int id) {
+        return apiMethods.getPreparation(userToken, id);
+    }
+
+    @Override
+    public Observable<List<ResponseHandBook>> getObjects(String userToken, int id) {
+        return apiMethods.getObjects(userToken, id);
     }
 }

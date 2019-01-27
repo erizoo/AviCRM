@@ -10,14 +10,15 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponseScan;
+import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
-import ru.specaviagroup.lk.aviacrm.data.models.ResponseToken;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseSaveFlyActive;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
-import ru.specaviagroup.lk.aviacrm.data.models.ResponseView;
+import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
 
 public interface ApiMethods {
 
@@ -46,4 +47,20 @@ public interface ApiMethods {
     @GET("fields/{id}")
     Observable<List<String>> getView(@Header("Authorization") String userToken,
                                      @Path("id") Integer objectId);
+
+    @GET("fly-active/{id}")
+    Observable<List<ResponsePoint>> getPoints(@Header("Authorization") String userToken,
+                                              @Path("id") Integer objectId);
+
+    @POST("worksheet/{id}")
+    Observable<Response<ResponseSaveFlyActive>> saveFlyActive(@Header("Authorization") String userToken,
+                                                              @Body RequestFlyActive requestFlyActive,
+                                                              @Path("id") int objectId);
+    @GET("get-pesticides/{id}")
+    Observable<List<ResponseHandBook>> getPreparation(@Header("Authorization") String userToken,
+                                                      @Path("id") int id);
+
+    @GET("fly-control-active/{id}")
+    Observable<List<ResponseHandBook>> getObjects(@Header("Authorization") String userToken,
+                                                  @Path("id") int id);
 }
