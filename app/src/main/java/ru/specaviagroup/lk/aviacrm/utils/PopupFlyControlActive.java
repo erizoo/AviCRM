@@ -4,20 +4,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestBirdsActive;
-import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.HandBookAdapter;
-import ru.specaviagroup.lk.aviacrm.ui.profile.ProfileActivity;
 
 public class PopupFlyControlActive extends PopupWindow implements HandBookAdapter.CallbackFlyControl {
 
@@ -28,13 +23,13 @@ public class PopupFlyControlActive extends PopupWindow implements HandBookAdapte
         super(contentView, width, height);
     }
 
-    public void setUp(View contentView, List<ResponseHandBook> responseHandBooks) {
+    public void setUp(View contentView, List<ResponseHandBook> responseHandBooks, boolean b) {
         setElevation(6.0f);
         setFocusable(true);
         setOutsideTouchable(false);
         showAtLocation(contentView, Gravity.CENTER, 0, 0);
         View popupView = getContentView();
-
+        requestBirdsActive = new RequestBirdsActive();
         LinearLayoutManager layoutManager = new LinearLayoutManager(popupView.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         RecyclerView recyclerView = popupView.findViewById(R.id.rv_fly_active);
@@ -76,13 +71,16 @@ public class PopupFlyControlActive extends PopupWindow implements HandBookAdapte
             if (swifts.getText().toString().equals("")) {
                 swifts.setText("0");
             }
-            requestBirdsActive = new RequestBirdsActive();
             String sb = "19=" + seagulls.getText().toString() + "," + "20=" + sparrows.getText().toString() + "," +
                     "21=" + crows.getText().toString() + "," + "22=" + pigeons.getText().toString() + "," +
                     "23=" + rooks.getText().toString() + "," + "24=" + swallows.getText().toString() + "," +
                     "25=" + magpies.getText().toString() + "," + "26=" + swifts.getText().toString() + ",";
             requestBirdsActive.setPests(sb);
-            callbackPopupFlyControl.saveBirdsActive(requestBirdsActive);
+            if (b){
+                callbackPopupFlyControl.saveBirdsActive(requestBirdsActive, true);
+            } else {
+                callbackPopupFlyControl.saveBirdsActive(requestBirdsActive, false);
+            }
             dismiss();
         });
         popupView.findViewById(R.id.abort_popup_button).setOnClickListener(v -> {
@@ -101,6 +99,6 @@ public class PopupFlyControlActive extends PopupWindow implements HandBookAdapte
 
     public interface CallbackPopupFlyControl {
 
-        void saveBirdsActive(RequestBirdsActive requestBirdsActive);
+        void saveBirdsActive(RequestBirdsActive requestBirdsActive, boolean isActive);
     }
 }

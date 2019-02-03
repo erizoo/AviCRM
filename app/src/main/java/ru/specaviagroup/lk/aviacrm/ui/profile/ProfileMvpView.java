@@ -21,4 +21,6 @@ public interface ProfileMvpView extends MvpView {
     void getPreparation(List<ResponseHandBook> responseHandBook);
 
     void getObjects(List<ResponseHandBook> responseHandBooks);
+
+    void getObjectsCatching(List<ResponseHandBook> responseHandBooks);
 }

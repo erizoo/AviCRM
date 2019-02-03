@@ -24,12 +24,14 @@ import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestBirdsActive;
-import ru.specaviagroup.lk.aviacrm.ui.adapters.HandBookAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.RequestBirdsAdapter;
+import ru.specaviagroup.lk.aviacrm.ui.adapters.RequestBirdsCatching;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseActivity;
 import ru.specaviagroup.lk.aviacrm.utils.PopupDetailInsect;
 import ru.specaviagroup.lk.aviacrm.utils.PopupFlyControlActive;
+import ru.specaviagroup.lk.aviacrm.utils.PopupFlyControlTrap;
 import ru.specaviagroup.lk.aviacrm.utils.PopupHandBook;
+import ru.specaviagroup.lk.aviacrm.utils.PopupRodentsAndCrawlingCatching;
 import ru.specaviagroup.lk.aviacrm.utils.PopupVscActive;
 
 public class ProfileActivity extends BaseActivity implements ProfileMvpView, PopupDetailInsect.Callback, PopupHandBook.Callback,
@@ -94,8 +96,21 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @BindView(R.id.plus_fly_control_active)
     ImageView plusFlyControlActive;
+    @BindView(R.id.plus_fly_control_catching)
+    ImageView plusFlyControlCatching;
     @BindView(R.id.recycler_view_fly_control_active)
     RecyclerView recyclerViewFlyControlActive;
+    @BindView(R.id.recycler_view_fly_control_catching)
+    RecyclerView recyclerViewFlyControlCatching;
+
+    @BindView(R.id.checkbox_rodents_and_crawling_catching_yes)
+    CheckBox checkBoxRodentsAndCrawlingCatchingYes;
+    @BindView(R.id.checkbox_rodents_and_crawling_catching_no)
+    CheckBox checkBoxRodentsAndCrawlingCatchingNo;
+    @BindView(R.id.checkbox_rodents_and_crawling_replacement_glue_yes)
+    CheckBox checkBoxRodentsAndCrawlingReplacementGlueYes;
+    @BindView(R.id.checkbox_rodents_and_crawling_replacement_glue_no)
+    CheckBox checkBoxRodentsAndCrawlingReplacementGlueNo;
 
     @Inject
     ProfilePresenter<ProfileMvpView> presenter;
@@ -106,6 +121,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     private boolean isVscControlReplacementFeramon = false;
     private boolean isVscControlActive = false;
     private RequestBirdsAdapter requestBirdsAdapter;
+    private RequestBirdsCatching requestBirdsCatching;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,6 +135,12 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewFlyControlActive.setLayoutManager(layoutManager);
         recyclerViewFlyControlActive.setAdapter(requestBirdsAdapter);
+
+        requestBirdsCatching = new RequestBirdsCatching();
+        LinearLayoutManager layoutManagerCatching = new LinearLayoutManager(this);
+        layoutManagerCatching.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewFlyControlCatching.setLayoutManager(layoutManagerCatching);
+        recyclerViewFlyControlCatching.setAdapter(requestBirdsCatching);
     }
 
     @Override
@@ -146,14 +168,24 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         popupWindow.setUp(contentView);
     }
 
-    public void showPopupFlyControlActive(View contentView, List<ResponseHandBook> responseHandBooks) {
+    public void showPopupFlyControlActive(View contentView, List<ResponseHandBook> responseHandBooks, boolean b) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_fly_active, null);
         PopupFlyControlActive popupWindow = new PopupFlyControlActive(
                 popupView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setCallback(this);
-        popupWindow.setUp(contentView, responseHandBooks);
+        popupWindow.setUp(contentView, responseHandBooks, b);
+    }
+
+    public void showPopuprpdentsAndCrawlingCatching(View contentView) {
+        @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_rodents_crawling_catching, null);
+        PopupRodentsAndCrawlingCatching popupWindow = new PopupRodentsAndCrawlingCatching(
+                popupView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setCallback(this);
+        popupWindow.setUp(contentView);
     }
 
     public void showPopupHandBook(View contentView, List<ResponseHandBook> responseHandBook) {
@@ -218,7 +250,12 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @Override
     public void getObjects(List<ResponseHandBook> responseHandBooks) {
-        showPopupFlyControlActive(firstLayoutValue, responseHandBooks);
+        showPopupFlyControlActive(firstLayoutValue, responseHandBooks, true);
+    }
+
+    @Override
+    public void getObjectsCatching(List<ResponseHandBook> responseHandBooks) {
+        showPopupFlyControlActive(firstLayoutValue, responseHandBooks, false);
     }
 
     @Override
@@ -353,17 +390,48 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     public void clickCheckboxFlyControlActiveNo() {
         plusFlyControlActive.setVisibility(View.GONE);
         recyclerViewFlyControlActive.setVisibility(View.GONE);
+        requestBirdsAdapter.clear();
         checkBoxFlyControlActiveYes.setChecked(false);
     }
 
     @OnClick(R.id.checkbox_fly_control_catching_birds_yes)
     public void clickCheckboxFlyControlCatchingBirdsYes() {
+        plusFlyControlCatching.setVisibility(View.VISIBLE);
         checkBoxFlyControlCatchingBirdsNo.setChecked(false);
+    }
+
+    @OnClick(R.id.plus_fly_control_catching)
+    public void plusFlyControlCatchingClick() {
+        presenter.getObjectsCatching(1);
     }
 
     @OnClick(R.id.checkbox_fly_control_catching_birds_no)
     public void clickCheckboxFlyControlCatchingBirdsNo() {
+        plusFlyControlCatching.setVisibility(View.GONE);
+        recyclerViewFlyControlCatching.setVisibility(View.GONE);
         checkBoxFlyControlCatchingBirdsYes.setChecked(false);
+        requestBirdsCatching.clear();
+    }
+
+
+    @OnClick(R.id.checkbox_rodents_and_crawling_catching_yes)
+    public void clickCheckboxRodentsAndCrawlingCatchingYes() {
+        checkBoxRodentsAndCrawlingCatchingNo.setChecked(false);
+    }
+
+    @OnClick(R.id.checkbox_rodents_and_crawling_catching_no)
+    public void clickCheckboxRodentsAndCrawlingCatchingNo() {
+        checkBoxRodentsAndCrawlingCatchingYes.setChecked(false);
+    }
+
+    @OnClick(R.id.checkbox_rodents_and_crawling_replacement_glue_yes)
+    public void clickCheckboxRodentsAndCrawlingReplacementGlueYes() {
+        checkBoxRodentsAndCrawlingReplacementGlueNo.setChecked(false);
+    }
+
+    @OnClick(R.id.checkbox_rodents_and_crawling_replacement_glue_no)
+    public void clickCheckboxRodentsAndCrawlingReplacementGlueNo() {
+        checkBoxRodentsAndCrawlingReplacementGlueYes.setChecked(false);
     }
 
     @Override
@@ -372,7 +440,12 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     }
 
     @Override
-    public void saveBirdsActive(RequestBirdsActive requestBirdsActive) {
-        requestBirdsAdapter.setItems(requestBirdsActive);
+    public void saveBirdsActive(RequestBirdsActive requestBirdsActive, boolean isActive) {
+        if (isActive) {
+            requestBirdsAdapter.setItems(requestBirdsActive);
+        } else {
+            requestBirdsCatching.setItems(requestBirdsActive);
+        }
+        recyclerViewFlyControlCatching.setVisibility(View.VISIBLE);
     }
 }

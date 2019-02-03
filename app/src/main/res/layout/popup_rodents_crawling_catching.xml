@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="29dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/panel_inactive"
+    android:elevation="4dp"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/save_popup_button"
+            style="@style/AppTheme.Button.Popup"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_green"
+            android:layout_marginTop="20dp"
+            android:text="@string/save"
+            app:layout_constraintTop_toBottomOf="@+id/cockroaches" />
+
+        <Button
+            android:id="@+id/abort_popup_button"
+            style="@style/AppTheme.Button.Popup"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_blue"
+            android:layout_marginTop="20dp"
+            android:text="@string/abort"
+            app:layout_constraintTop_toBottomOf="@+id/save_popup_button" />
+
+        <TextView
+            android:id="@+id/rat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Крыса"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <TextView
+            android:id="@+id/mouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Мышь"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rat" />
+
+        <TextView
+            android:id="@+id/shrew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Землеройка"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mouse" />
+
+        <TextView
+            android:id="@+id/ants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Муравьи"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shrew" />
+
+        <TextView
+            android:id="@+id/mokritsy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Мокрицы"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ants" />
+
+        <TextView
+            android:id="@+id/spiders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Пауки"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mokritsy" />
+
+        <TextView
+            android:id="@+id/cockroaches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Тараканы"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spiders" />
+
+        <EditText
+            android:id="@+id/rat_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/rat"
+            app:layout_constraintTop_toTopOf="@+id/rat" />
+
+        <EditText
+            android:id="@+id/mouse_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/mouse"
+            app:layout_constraintTop_toTopOf="@+id/mouse" />
+
+        <EditText
+            android:id="@+id/shrew_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/shrew"
+            app:layout_constraintTop_toTopOf="@+id/shrew"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/ants_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/ants"
+            app:layout_constraintTop_toTopOf="@+id/ants"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/mokritsy_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/mokritsy"
+            app:layout_constraintTop_toTopOf="@+id/mokritsy"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/spiders_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/spiders"
+            app:layout_constraintTop_toTopOf="@+id/spiders"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/cockroaches_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/cockroaches"
+            app:layout_constraintTop_toTopOf="@+id/cockroaches"
+            tools:ignore="MissingConstraints" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

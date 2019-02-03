@@ -14,4 +14,6 @@ public interface ProfilePresenter <V extends ProfileMvpView> extends MvpPresente
     void getPreparation(int i);
 
     void getObjects(int i);
+
+    void getObjectsCatching(int i);
 }

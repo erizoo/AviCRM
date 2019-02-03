@@ -18,7 +18,7 @@ import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestBirdsActive;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseViewHolder;
 
-public class RequestBirdsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class RequestBirdsCatching extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context context;
     private List<RequestBirdsActive> requestBirdsAdapters = new ArrayList<>();
@@ -26,7 +26,7 @@ public class RequestBirdsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-        return new RequestBirdsAdapter.RequestBirdsViewHolder(
+        return new RequestBirdsCatching.RequestBirdsCatchingViewHolder(
                 LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.items_request_birds, viewGroup, false)
         );
     }
@@ -58,14 +58,15 @@ public class RequestBirdsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public void clear() {
         this.requestBirdsAdapters.clear();
+        notifyDataSetChanged();
     }
 
-    public class RequestBirdsViewHolder extends BaseViewHolder {
+    public class RequestBirdsCatchingViewHolder extends BaseViewHolder {
 
         @BindView(R.id.value_text_view)
         TextView value;
 
-        public RequestBirdsViewHolder(View itemView) {
+        public RequestBirdsCatchingViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             context = itemView.getContext();
@@ -79,3 +80,4 @@ public class RequestBirdsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     }
 }
+
