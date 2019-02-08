@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class RequestFlyActive {
 
+
+
     @SerializedName("trap_id")
     private String id;
     @SerializedName("pests_counts")

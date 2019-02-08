@@ -18,18 +18,16 @@ import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseViewHolder;
 
-public class HandBookAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class AdditionalQuestionsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context context;
     private List<ResponseHandBook> responseHandBook = new ArrayList<>();
     private Callback callback;
-    private CallbackFlyControl callbackFlyControl;
-    private boolean isFlyControlActive = false;
 
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-        return new HandBookAdapter.HandBookViewHolder(
+        return new AdditionalQuestionsAdapter.AdditionalQuestionsViewHolder(
                 LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.items_hand_book, viewGroup, false)
         );
     }
@@ -53,38 +51,20 @@ public class HandBookAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         this.callback = callback;
     }
 
-    public void setCallbackFlyControl(CallbackFlyControl callbackFlyControl) {
-        this.callbackFlyControl = callbackFlyControl;
-    }
-
-    public void setItemsFlyControl(List<ResponseHandBook> responseHandBooks, boolean isFlyControlActive) {
-        this.responseHandBook.clear();
-        this.isFlyControlActive = isFlyControlActive;
-        this.responseHandBook.addAll(responseHandBooks);
-    }
-
-
     public interface Callback {
 
-        void save(ResponseHandBook responseHandBook);
+        void saveActions(ResponseHandBook responseHandBook);
 
     }
 
-    public interface CallbackFlyControl {
-
-        void save(ResponseHandBook responseHandBook);
-
-    }
-
-    public class HandBookViewHolder extends BaseViewHolder {
+    public class AdditionalQuestionsViewHolder extends BaseViewHolder {
 
         @BindView(R.id.title)
         TextView title;
         @BindView(R.id.checkbox)
         CheckBox checkBox;
 
-
-        public HandBookViewHolder(View itemView) {
+        public AdditionalQuestionsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             context = itemView.getContext();
@@ -93,16 +73,9 @@ public class HandBookAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             title.setText(responseHandBook.get(position).getPoint());
-            if (isFlyControlActive) {
-                checkBox.setOnClickListener(v -> {
-                    callbackFlyControl.save(responseHandBook.get(position));
-
-                });
-            } else {
-                checkBox.setOnClickListener(v -> {
-                    callback.save(responseHandBook.get(position));
-                });
-            }
+            checkBox.setOnClickListener(v -> {
+                callback.saveActions(responseHandBook.get(position));
+            });
         }
 
     }

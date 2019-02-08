@@ -9,6 +9,7 @@ import retrofit2.Response;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseAction;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
@@ -87,5 +88,15 @@ public class ServiceNetworkImp implements ServiceNetwork {
     @Override
     public Observable<List<ResponseHandBook>> getObjects(String userToken, int id) {
         return apiMethods.getObjects(userToken, id);
+    }
+
+    @Override
+    public Observable<List<ResponseHandBook>> getActions(String userToken) {
+        return apiMethods.getActions(userToken);
+    }
+
+    @Override
+    public Observable<List<ResponseHandBook>> getAllPets(String userToken) {
+        return apiMethods.getAllPets(userToken);
     }
 }

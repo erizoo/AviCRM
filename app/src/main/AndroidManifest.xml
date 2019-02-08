@@ -19,7 +19,7 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.trap.TrapActivity" />
         <activity android:name=".ui.qr.QrCodeScannerActivity" />
-        <activity android:name=".ui.profile.ProfileActivity" >
+        <activity android:name=".ui.profile.ProfileActivity" android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

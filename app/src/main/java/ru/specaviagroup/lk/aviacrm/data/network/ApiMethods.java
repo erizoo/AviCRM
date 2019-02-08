@@ -13,6 +13,7 @@ import retrofit2.http.Query;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseAction;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
@@ -63,4 +64,10 @@ public interface ApiMethods {
     @GET("fly-control-active/{id}")
     Observable<List<ResponseHandBook>> getObjects(@Header("Authorization") String userToken,
                                                   @Path("id") int id);
+
+    @GET("fly-control-prof")
+    Observable<List<ResponseHandBook>> getActions(@Header("Authorization") String userToken);
+
+    @GET("get-all-pest")
+    Observable<List<ResponseHandBook>> getAllPets(@Header("Authorization") String userToken);
 }

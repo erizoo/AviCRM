@@ -59,6 +59,7 @@ public class PopupDetailInsect extends PopupWindow {
         });
         popupView.findViewById(R.id.abort_popup_button).setOnClickListener(v -> {
             dismiss();
+            callback.abort();
         });
     }
 
@@ -69,6 +70,8 @@ public class PopupDetailInsect extends PopupWindow {
     public interface Callback {
 
         void saveFlyActive(String requestFlyActive);
+
+        void abort();
 
     }
 }

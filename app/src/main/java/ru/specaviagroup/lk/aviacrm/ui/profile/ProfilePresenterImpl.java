@@ -20,7 +20,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getView(Integer objectId) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getView("Bearer f777424ae437909c44289af18e91a51e66564cc4", objectId)
+                getRepositoryManager().getServiceNetwork().getView("Bearer 0b17af68059047bb82d858f817d2e89530932a5b", objectId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -33,7 +33,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getPoints(Integer objectId) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getPoints("Bearer f777424ae437909c44289af18e91a51e66564cc4", objectId)
+                getRepositoryManager().getServiceNetwork().getPoints("Bearer 0b17af68059047bb82d858f817d2e89530932a5b", objectId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -46,7 +46,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void saveFlyActive(RequestFlyActive requestFlyActive, int objectId) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().saveFlyActive("Bearer f777424ae437909c44289af18e91a51e66564cc4",
+                getRepositoryManager().getServiceNetwork().saveFlyActive("Bearer 0b17af68059047bb82d858f817d2e89530932a5b",
                         requestFlyActive, objectId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -65,7 +65,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getPreparation(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getPreparation("Bearer f777424ae437909c44289af18e91a51e66564cc4", id)
+                getRepositoryManager().getServiceNetwork().getPreparation("Bearer 0b17af68059047bb82d858f817d2e89530932a5b", id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -93,11 +93,39 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getObjectsCatching(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getObjects("Bearer f777424ae437909c44289af18e91a51e66564cc4", id)
+                getRepositoryManager().getServiceNetwork().getObjects("Bearer 0b17af68059047bb82d858f817d2e89530932a5b", id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 getMvpView()::getObjectsCatching,
+                                getMvpView()::error
+                        )
+
+        );
+    }
+
+    @Override
+    public void getActions() {
+        getCompositeDisposable().add(
+                getRepositoryManager().getServiceNetwork().getActions("Bearer 0b17af68059047bb82d858f817d2e89530932a5b")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                getMvpView()::getActions,
+                                getMvpView()::error
+                        )
+
+        );
+    }
+
+    @Override
+    public void getAllPets() {
+        getCompositeDisposable().add(
+                getRepositoryManager().getServiceNetwork().getAllPets("Bearer 0b17af68059047bb82d858f817d2e89530932a5b")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                getMvpView()::getAllPets,
                                 getMvpView()::error
                         )
 

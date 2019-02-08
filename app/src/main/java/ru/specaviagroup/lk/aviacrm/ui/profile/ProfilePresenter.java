@@ -11,9 +11,13 @@ public interface ProfilePresenter <V extends ProfileMvpView> extends MvpPresente
 
     void saveFlyActive(RequestFlyActive requestFlyActive, int objectId);
 
-    void getPreparation(int i);
+    void getPreparation(int id);
 
-    void getObjects(int i);
+    void getObjects(int id);
 
-    void getObjectsCatching(int i);
+    void getObjectsCatching(int id);
+
+    void getActions();
+
+    void getAllPets();
 }

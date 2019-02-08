@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -24,29 +25,38 @@ import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestBirdsActive;
+import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
+import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyNeedRep;
+import ru.specaviagroup.lk.aviacrm.data.request.RequestGlutRepTrap;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.RequestBirdsAdapter;
 import ru.specaviagroup.lk.aviacrm.ui.adapters.RequestBirdsCatching;
 import ru.specaviagroup.lk.aviacrm.ui.base.BaseActivity;
+import ru.specaviagroup.lk.aviacrm.utils.PopupActions;
+import ru.specaviagroup.lk.aviacrm.utils.PopupAdditionalQuestions;
 import ru.specaviagroup.lk.aviacrm.utils.PopupDetailInsect;
 import ru.specaviagroup.lk.aviacrm.utils.PopupFlyControlActive;
-import ru.specaviagroup.lk.aviacrm.utils.PopupFlyControlTrap;
 import ru.specaviagroup.lk.aviacrm.utils.PopupHandBook;
-import ru.specaviagroup.lk.aviacrm.utils.PopupRodentsAndCrawlingCatching;
 import ru.specaviagroup.lk.aviacrm.utils.PopupVscActive;
 
 public class ProfileActivity extends BaseActivity implements ProfileMvpView, PopupDetailInsect.Callback, PopupHandBook.Callback,
-        PopupVscActive.Callback, PopupFlyControlActive.CallbackPopupFlyControl {
+        PopupVscActive.Callback, PopupFlyControlActive.CallbackPopupFlyControl, PopupActions.Callback, PopupAdditionalQuestions.Callback {
 
     @BindView(R.id.title_first)
     Button titleFirst;
-    @BindView(R.id.first_layout_value)
+    @BindView(R.id.first_layout)
     ConstraintLayout firstLayoutValue;
+    @BindView(R.id.layout)
+    ConstraintLayout layout;
     @BindView(R.id.street_layout)
     ConstraintLayout streetAreaLayout;
+    @BindView(R.id.rodents_and_crawling_layout)
+    ConstraintLayout rodentsAndCrawlingLayout;
     @BindView(R.id.title_editText_link_active)
     TextView valueFlyActive;
     @BindView(R.id.title_editText_link)
     TextView preparationValue;
+    @BindView(R.id.comments_fly_active)
+    TextView flyActiveComments;
     @BindView(R.id.value_bait_replacement)
     TextView baitReplacementValue;
     @BindView(R.id.value_vcs_control_replacement_glue)
@@ -112,16 +122,82 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     @BindView(R.id.checkbox_rodents_and_crawling_replacement_glue_no)
     CheckBox checkBoxRodentsAndCrawlingReplacementGlueNo;
 
+    @BindView(R.id.checkbox_preventive_actions_yes)
+    CheckBox checkBoxReventiveActionsYes;
+    @BindView(R.id.checkbox_preventive_actions_no)
+    CheckBox checkBoxReventiveActionsNo;
+    @BindView(R.id.preventive_actions_value)
+    TextView preventiveActionsValue;
+
+    @BindView(R.id.checkbox_clean_trap_yes)
+    CheckBox checkBoxCleanTrapYes;
+    @BindView(R.id.checkbox_clean_trap_no)
+    CheckBox checkBoxCleanTrapNo;
+    @BindView(R.id.checkbox_complaints_yes)
+    CheckBox checkBoxComplaintsYes;
+    @BindView(R.id.checkbox_complaints_no)
+    CheckBox checkBoxComplaintsNo;
+    @BindView(R.id.checkbox_broken_trap_yes)
+    CheckBox checkBoxBrokenTrapYes;
+    @BindView(R.id.checkbox_broken_trap_no)
+    CheckBox checkBoxBrokenTrapNo;
+
+    @BindView(R.id.checkbox_unavailable_trap_yes)
+    CheckBox checkBoxUnavailableTrapYes;
+    @BindView(R.id.checkbox_unavailable_trap_no)
+    CheckBox checkBoxUnavailableTrapNo;
+    @BindView(R.id.checkbox_dead_pests_trap_yes)
+    CheckBox checkBoxDeadPestsTrapYes;
+    @BindView(R.id.checkbox_dead_pests_trap_no)
+    CheckBox checkBoxDeadPestsTrapNo;
+    @BindView(R.id.checkbox_live_pests_trap_yes)
+    CheckBox checkLivePestsTrapYes;
+    @BindView(R.id.checkbox_live_pests_trap_no)
+    CheckBox checkLivePestsTrapNo;
+    @BindView(R.id.checkbox_life_activity_trap_yes)
+    CheckBox checkBoxLifeActivityTrapYes;
+    @BindView(R.id.checkbox_life_activity_trap_no)
+    CheckBox checkBoxLifeActivityTrapNo;
+    @BindView(R.id.checkbox_fresh_holes_trap_yes)
+    CheckBox checkBoxFreshHolesTrapYes;
+    @BindView(R.id.checkbox_fresh_holes_trap_no)
+    CheckBox checkBoxFreshHolesTrapNo;
+
+    @BindView(R.id.dead_pests_value)
+    TextView deadPestsValue;
+    @BindView(R.id.dead_pests_comments)
+    TextView deadPestsComments;
+    @BindView(R.id.live_pests_value)
+    TextView livePestsValue;
+    @BindView(R.id.live_pests_comments)
+    TextView livePestsComments;
+    @BindView(R.id.life_activity_trap_value)
+    TextView lifeActivityValue;
+    @BindView(R.id.life_activity_comments)
+    TextView lifeActivityComments;
+    @BindView(R.id.fresh_holes_value)
+    TextView freshHolesValue;
+    @BindView(R.id.fresh_holes_comments)
+    TextView freshHolesComments;
+    @BindView(R.id.complaints_value)
+    TextView complaintsValue;
+    @BindView(R.id.complaints_comments)
+    TextView complaintsComments;
+
+
     @Inject
     ProfilePresenter<ProfileMvpView> presenter;
 
     private Integer objectId;
+    private String trapId;
     private boolean isStreetArea = false;
     private boolean isVscControlReplacementGlue = false;
     private boolean isVscControlReplacementFeramon = false;
     private boolean isVscControlActive = false;
     private RequestBirdsAdapter requestBirdsAdapter;
     private RequestBirdsCatching requestBirdsCatching;
+    private boolean isFlyActive = false;
+    private String type = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,6 +234,18 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         popupWindow.setUp(contentView);
     }
 
+    public void showPopupAdditionalQuestions(View contentView, List<ResponseHandBook> responseHandBooks, String type) {
+        @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_handbook, null);
+        PopupAdditionalQuestions popupWindow = new PopupAdditionalQuestions(
+                popupView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setCallback(this);
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        popupWindow.setUp(contentView, responseHandBooks, type);
+    }
+
+
     public void showPopupVscActive(View contentView) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_vsc_active, null);
         PopupVscActive popupWindow = new PopupVscActive(
@@ -178,15 +266,6 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         popupWindow.setUp(contentView, responseHandBooks, b);
     }
 
-    public void showPopuprpdentsAndCrawlingCatching(View contentView) {
-        @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_rodents_crawling_catching, null);
-        PopupRodentsAndCrawlingCatching popupWindow = new PopupRodentsAndCrawlingCatching(
-                popupView,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
-        popupWindow.setCallback(this);
-        popupWindow.setUp(contentView);
-    }
 
     public void showPopupHandBook(View contentView, List<ResponseHandBook> responseHandBook) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_handbook, null);
@@ -211,8 +290,14 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     public void getData(List<String> responseView) {
         for (String items : responseView) {
             if (items.equals("flyActive,glutRepTrap,flyNeedRep")) {
+                isFlyActive = true;
                 titleFirst.setVisibility(View.VISIBLE);
                 firstLayoutValue.setVisibility(View.VISIBLE);
+                checkBoxActiveNo.setChecked(true);
+                checkBoxPreparationNo.setChecked(true);
+            }
+            if (items.equals("trappedPestPoint,glutRepTrap,problemBox")) {
+                rodentsAndCrawlingLayout.setVisibility(View.VISIBLE);
             }
             if (items.equals("havePog,beReaload")) {
                 streetAreaLayout.setVisibility(View.VISIBLE);
@@ -259,30 +344,62 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     }
 
     @Override
+    public void getActions(List<ResponseHandBook> responseActions) {
+        showPopupHandBookActions(firstLayoutValue, responseActions);
+    }
+
+    @Override
+    public void getAllPets(List<ResponseHandBook> responseHandBooks) {
+        showPopupAdditionalQuestions(layout, responseHandBooks, type);
+    }
+
+    private void showPopupHandBookActions(View contentView, List<ResponseHandBook> responseActions) {
+        @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_handbook, null);
+        PopupActions popupWindow = new PopupActions(
+                popupView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                contentView.getHeight());
+        popupWindow.setCallback(this);
+        popupWindow.setUp(contentView, responseActions);
+    }
+
+    @Override
     public void saveFlyActive(String requestFlyActive) {
         valueFlyActive.setText(requestFlyActive);
     }
 
     @Override
+    public void abort() {
+        checkBoxActiveNo.setChecked(true);
+        checkBoxActiveYes.setChecked(false);
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
     public void savePreparation(ResponseHandBook responseHandBook) {
         if (isStreetArea) {
-            baitReplacementValue.setText(responseHandBook.getPoint());
+            baitReplacementValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
             isStreetArea = false;
         }
         if (isVscControlReplacementGlue) {
-            vcsControlReplacementGlueValue.setText(responseHandBook.getPoint());
+            vcsControlReplacementGlueValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
             isVscControlReplacementGlue = false;
         }
         if (isVscControlReplacementFeramon) {
-            vcsControlReplacementFeramonValue.setText(responseHandBook.getPoint());
+            vcsControlReplacementFeramonValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
             isVscControlReplacementFeramon = false;
         }
         if (isVscControlActive) {
-            vcsControlActiveValue.setText(responseHandBook.getPoint());
+            vcsControlActiveValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
             isVscControlActive = false;
         }
 
-        preparationValue.setText(responseHandBook.getPoint());
+        try {
+            preparationValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
+        } catch (NullPointerException e) {
+            Snackbar.make(firstLayoutValue, "Выберете значение", Snackbar.LENGTH_LONG).show();
+        }
+
 
     }
 
@@ -294,25 +411,42 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     @OnClick(R.id.checkbox_active_yes)
     public void clickCheckboxActiveYes() {
         showPopupDetailInsect(firstLayoutValue);
-        checkBoxActiveNo.setChecked(false);
+        if (checkBoxActiveNo.isChecked()) {
+            checkBoxActiveNo.setChecked(false);
+        } else {
+            checkBoxActiveYes.setChecked(true);
+        }
     }
 
     @OnClick(R.id.checkbox_active_no)
     public void clickCheckboxActiveNo() {
         valueFlyActive.setText("");
-        checkBoxActiveYes.setChecked(false);
+        if (checkBoxActiveYes.isChecked()) {
+            checkBoxActiveYes.setChecked(false);
+        } else {
+            checkBoxActiveNo.setChecked(true);
+        }
+
     }
 
     @OnClick(R.id.checkbox_preparation_yes)
     public void clickCheckboxPreparationYes() {
         presenter.getPreparation(5);
-        checkBoxPreparationNo.setChecked(false);
+        if (checkBoxPreparationNo.isChecked()) {
+            checkBoxPreparationNo.setChecked(false);
+        } else {
+            checkBoxPreparationYes.setChecked(true);
+        }
     }
 
     @OnClick(R.id.checkbox_preparation_no)
     public void clickCheckboxPreparationNo() {
         preparationValue.setText("");
-        checkBoxPreparationYes.setChecked(false);
+        if (checkBoxPreparationYes.isChecked()) {
+            checkBoxPreparationYes.setChecked(false);
+        } else {
+            checkBoxPreparationNo.setChecked(true);
+        }
     }
 
     @OnClick(R.id.checkbox_bites_yes)
@@ -413,7 +547,6 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         requestBirdsCatching.clear();
     }
 
-
     @OnClick(R.id.checkbox_rodents_and_crawling_catching_yes)
     public void clickCheckboxRodentsAndCrawlingCatchingYes() {
         checkBoxRodentsAndCrawlingCatchingNo.setChecked(false);
@@ -434,6 +567,186 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         checkBoxRodentsAndCrawlingReplacementGlueYes.setChecked(false);
     }
 
+    @OnClick(R.id.checkbox_fresh_holes_trap_yes)
+    public void clickCheckBoxFreshHolesTrapYes() {
+        type = "FRESH_HOLES";
+        presenter.getAllPets();
+        if (checkBoxFreshHolesTrapNo.isChecked()) {
+            checkBoxFreshHolesTrapNo.setChecked(false);
+        } else {
+            checkBoxFreshHolesTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_fresh_holes_trap_no)
+    public void clickCheckBoxFreshHolesTrapNo() {
+        freshHolesValue.setText("");
+        if (checkBoxFreshHolesTrapYes.isChecked()) {
+            checkBoxFreshHolesTrapYes.setChecked(false);
+        } else {
+            checkBoxFreshHolesTrapNo.setChecked(true);
+        }
+    }
+
+
+    @OnClick(R.id.checkbox_clean_trap_yes)
+    public void clickCheckBoxCleanTrapYes() {
+        if (checkBoxCleanTrapNo.isChecked()) {
+            checkBoxCleanTrapNo.setChecked(false);
+        } else {
+            checkBoxCleanTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_clean_trap_no)
+    public void clickCheckBoxCleanTrapNo() {
+        if (checkBoxCleanTrapYes.isChecked()) {
+            checkBoxCleanTrapYes.setChecked(false);
+        } else {
+            checkBoxCleanTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_complaints_yes)
+    public void checkBoxComplaintsYes() {
+        type = "COMPLAINTS";
+        presenter.getAllPets();
+        if (checkBoxComplaintsNo.isChecked()) {
+            checkBoxComplaintsNo.setChecked(false);
+        } else {
+            checkBoxComplaintsYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_complaints_no)
+    public void checkBoxComplaintsNo() {
+        complaintsValue.setText("");
+        if (checkBoxComplaintsYes.isChecked()) {
+            checkBoxComplaintsYes.setChecked(false);
+        } else {
+            checkBoxComplaintsNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_broken_trap_yes)
+    public void clickCheckBoxBrokenTrapYes() {
+        if (checkBoxBrokenTrapNo.isChecked()) {
+            checkBoxBrokenTrapNo.setChecked(false);
+        } else {
+            checkBoxBrokenTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_broken_trap_no)
+    public void clickCheckBoxBrokenTrapNo() {
+        if (checkBoxBrokenTrapYes.isChecked()) {
+            checkBoxBrokenTrapYes.setChecked(false);
+        } else {
+            checkBoxBrokenTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_unavailable_trap_yes)
+    public void clickCheckBoxUnavailableTrapYes() {
+        if (checkBoxUnavailableTrapNo.isChecked()) {
+            checkBoxUnavailableTrapNo.setChecked(false);
+        } else {
+            checkBoxUnavailableTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_unavailable_trap_no)
+    public void clickCheckBoxUnavailableTrapNo() {
+        if (checkBoxUnavailableTrapYes.isChecked()) {
+            checkBoxUnavailableTrapYes.setChecked(false);
+        } else {
+            checkBoxUnavailableTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_dead_pests_trap_yes)
+    public void clickCheckDeadPestsTrapYes() {
+        type = "DEAD_PESTS";
+        presenter.getAllPets();
+        if (checkBoxDeadPestsTrapNo.isChecked()) {
+            checkBoxDeadPestsTrapNo.setChecked(false);
+        } else {
+            checkBoxDeadPestsTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_dead_pests_trap_no)
+    public void clickCheckDeadPestsTrapNo() {
+        deadPestsValue.setText("");
+        if (checkBoxDeadPestsTrapYes.isChecked()) {
+            checkBoxDeadPestsTrapYes.setChecked(false);
+        } else {
+            checkBoxDeadPestsTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_live_pests_trap_yes)
+    public void clickCheckLivePestsTrapYes() {
+        type = "LIVE_PESTS";
+        presenter.getAllPets();
+        if (checkLivePestsTrapNo.isChecked()) {
+            checkLivePestsTrapNo.setChecked(false);
+        } else {
+            checkLivePestsTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_live_pests_trap_no)
+    public void clickCheckLivePestsTrapNo() {
+        livePestsValue.setText("");
+        if (checkLivePestsTrapYes.isChecked()) {
+            checkLivePestsTrapYes.setChecked(false);
+        } else {
+            checkLivePestsTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_life_activity_trap_yes)
+    public void clickCheckBoxLifeActivityTrapYes() {
+        type = "LIFE_PESTS";
+        presenter.getAllPets();
+        if (checkBoxLifeActivityTrapNo.isChecked()) {
+            checkBoxLifeActivityTrapNo.setChecked(false);
+        } else {
+            checkBoxLifeActivityTrapYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_life_activity_trap_no)
+    public void clickCheckBoxLifeActivityTrapNo() {
+        lifeActivityValue.setText("");
+        if (checkBoxLifeActivityTrapYes.isChecked()) {
+            checkBoxLifeActivityTrapYes.setChecked(false);
+        } else {
+            checkBoxLifeActivityTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_preventive_actions_yes)
+    public void clickCheckBoxPreventiveActionsYes() {
+        presenter.getActions();
+        if (checkBoxReventiveActionsNo.isChecked()) {
+            checkBoxReventiveActionsNo.setChecked(false);
+        } else {
+            checkBoxReventiveActionsYes.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.checkbox_preventive_actions_no)
+    public void clickCheckBoxreventiveActionsNo() {
+        if (checkBoxReventiveActionsYes.isChecked()) {
+            checkBoxReventiveActionsYes.setChecked(false);
+        } else {
+            checkBoxReventiveActionsNo.setChecked(true);
+        }
+    }
+
+
     @Override
     public void saveVscActive(String requestVscActive) {
         vcsControlActiveValue.setText(requestVscActive);
@@ -447,5 +760,72 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
             requestBirdsCatching.setItems(requestBirdsActive);
         }
         recyclerViewFlyControlCatching.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.save_all)
+    public void saveAll() {
+        if (isFlyActive) {
+            if (checkBoxActiveYes.isChecked()) {
+                RequestFlyActive requestFlyActive = new RequestFlyActive();
+                requestFlyActive.setId("1");
+                requestFlyActive.setAmount(valueFlyActive.getText().toString());
+            }
+            if (checkBoxPreparationYes.isChecked()) {
+                RequestGlutRepTrap requestGlutRepTrap = new RequestGlutRepTrap();
+                requestGlutRepTrap.setTraps("1");
+                String[] strings = preparationValue.getText().toString().split("=");
+                requestGlutRepTrap.setPesticideId(strings[1]);
+            }
+            if (!flyActiveComments.getText().toString().equals("")) {
+                RequestFlyNeedRep requestFlyNeedRep = new RequestFlyNeedRep();
+                requestFlyNeedRep.setTraps("1");
+                requestFlyNeedRep.setComment(flyActiveComments.getText().toString());
+            }
+        }
+    }
+
+    @Override
+    public void saveActions(List<ResponseHandBook> responseHandBook) {
+        StringBuilder sb = new StringBuilder();
+        for (ResponseHandBook items : responseHandBook) {
+            sb.append(items.getId().toString()).append(",");
+        }
+        preventiveActionsValue.setText(sb.toString());
+    }
+
+    @Override
+    public void saveAdditionalQuestions(List<ResponseHandBook> responseHandBooks, String type, String comments) {
+        StringBuilder sb = new StringBuilder();
+        if (type.equals("DEAD_PESTS")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            deadPestsValue.setText(sb.toString());
+            deadPestsComments.setText(comments);
+        } else if (type.equals("LIVE_PESTS")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            livePestsValue.setText(sb.toString());
+            livePestsComments.setText(comments);
+        } else if (type.equals("LIFE_PESTS")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            lifeActivityValue.setText(sb.toString());
+            lifeActivityComments.setText(comments);
+        } else if (type.equals("FRESH_HOLES")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            freshHolesValue.setText(sb.toString());
+            freshHolesComments.setText(comments);
+        } else if (type.equals("COMPLAINTS")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            complaintsValue.setText(sb.toString());
+            complaintsComments.setText(comments);
+        }
     }
 }

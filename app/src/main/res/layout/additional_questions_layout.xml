@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    tools:ignore="MissingConstraints">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/additional_questions_button"
+                style="@style/AppTheme.Button.Blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/additional_questions_layout_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/panel_white"
+                app:layout_constraintTop_toBottomOf="@+id/additional_questions_button">
+
+                <RelativeLayout
+                    android:id="@+id/rl_preventive_actions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/title_preventive_actions"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="12dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Проводились профилактические мероприятия ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/preventive_actions_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/checkbox_preventive_actions_yes"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:backgroundTint="@android:color/transparent"
+                        android:maxLines="3"
+                        android:textSize="13sp" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_preventive_actions_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title_preventive_actions"
+                        android:layout_alignStart="@+id/title_preventive_actions"
+                        android:text="да"
+                        android:textAllCaps="true" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_preventive_actions_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title_preventive_actions"
+                        android:layout_alignEnd="@+id/title_preventive_actions"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/preventive_actions_value"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </RelativeLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clean_trap_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/rl_preventive_actions">
+
+                    <TextView
+                        android:id="@+id/title_clean_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="12dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Была ли убрана КТ ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_clean_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_clean_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_clean_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_clean_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_clean_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_clean_trap" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_clean_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/complaints_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/clean_trap_layout">
+
+                    <TextView
+                        android:id="@+id/title_complaints"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Есть жалобы ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_complaints_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_complaints"
+                        app:layout_constraintTop_toBottomOf="@+id/title_complaints" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_complaints_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_complaints"
+                        app:layout_constraintTop_toBottomOf="@+id/title_complaints" />
+
+                    <TextView
+                        android:id="@+id/complaints_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_complaints_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_complaints_yes"/>
+
+                    <TextView
+                        android:id="@+id/complaints_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/complaints_value"
+                        app:layout_constraintTop_toBottomOf="@+id/complaints_value"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/complaints_comments"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/broken_trap_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/complaints_layout">
+
+                    <TextView
+                        android:id="@+id/title_broken_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="12dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Была ли сломанна КТ ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_broken_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_broken_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_broken_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_broken_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_broken_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_broken_trap" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_broken_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/unavailable_trap_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/broken_trap_layout">
+
+                    <TextView
+                        android:id="@+id/title_unavailable_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Была ли недоступна КТ ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_unavailable_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_unavailable_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_unavailable_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_unavailable_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_unavailable_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_unavailable_trap" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_unavailable_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/dead_pests_trap_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/unavailable_trap_layout">
+
+                    <TextView
+                        android:id="@+id/title_dead_pests_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Обнаружены мертвые вредители ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_dead_pests_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_dead_pests_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_dead_pests_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_dead_pests_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_dead_pests_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_dead_pests_trap" />
+
+                    <TextView
+                        android:id="@+id/dead_pests_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_dead_pests_trap_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_dead_pests_trap_yes"/>
+
+                    <TextView
+                        android:id="@+id/dead_pests_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/dead_pests_value"
+                        app:layout_constraintTop_toBottomOf="@+id/dead_pests_value"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/dead_pests_value"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/live_pests_trap_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/dead_pests_trap_layout">
+
+                    <TextView
+                        android:id="@+id/title_live_pests_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Выявлены живые вредители ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_live_pests_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_live_pests_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_live_pests_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_live_pests_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_live_pests_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_live_pests_trap" />
+
+                    <TextView
+                        android:id="@+id/live_pests_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_live_pests_trap_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_live_pests_trap_yes"/>
+
+                    <TextView
+                        android:id="@+id/live_pests_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/live_pests_value"
+                        app:layout_constraintTop_toBottomOf="@+id/live_pests_value"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_live_pests_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/life_activity_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/live_pests_trap_layout">
+
+                    <TextView
+                        android:id="@+id/title_life_activity_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Обнаруженны следы жизнидеятельности ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_life_activity_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_life_activity_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_life_activity_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_life_activity_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_life_activity_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_life_activity_trap" />
+
+                    <TextView
+                        android:id="@+id/life_activity_trap_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_life_activity_trap_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_life_activity_trap_yes"/>
+
+                    <TextView
+                        android:id="@+id/life_activity_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/life_activity_trap_value"
+                        app:layout_constraintTop_toBottomOf="@+id/life_activity_trap_value"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_life_activity_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/fresh_holes_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/life_activity_layout">
+
+                    <TextView
+                        android:id="@+id/title_fresh_holes_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Есть свежие норы/очаги ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_fresh_holes_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_fresh_holes_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_fresh_holes_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_fresh_holes_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_fresh_holes_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_fresh_holes_trap" />
+
+                    <TextView
+                        android:id="@+id/fresh_holes_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_fresh_holes_trap_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_fresh_holes_trap_yes"/>
+
+                    <TextView
+                        android:id="@+id/fresh_holes_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/fresh_holes_value"
+                        app:layout_constraintTop_toBottomOf="@+id/fresh_holes_value"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_fresh_holes_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
