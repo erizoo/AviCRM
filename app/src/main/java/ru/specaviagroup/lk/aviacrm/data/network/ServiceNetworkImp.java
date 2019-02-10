@@ -99,4 +99,9 @@ public class ServiceNetworkImp implements ServiceNetwork {
     public Observable<List<ResponseHandBook>> getAllPets(String userToken) {
         return apiMethods.getAllPets(userToken);
     }
+
+    @Override
+    public Observable<List<ResponseHandBook>> getAreas(String userToken, int id) {
+        return apiMethods.getAreas(userToken, id);
+    }
 }

@@ -11,4 +11,7 @@
     <color name="colorGreen">#008000</color>
     <color name="colorButtonBlue">#0089b6</color>
     <color name="colorDivider">#eceeef</color>
+    <color name="colorAccentTextGray">#707070</color>
+    <color name="fieldName" />
+    <color name="fieldData" />
 </resources>

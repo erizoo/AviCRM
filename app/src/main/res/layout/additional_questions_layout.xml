@@ -24,7 +24,6 @@
                 android:text="ДОПОЛНИТЕЛЬНЫЕ ВОПРОСЫ"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/additional_questions_layout_value"
                 android:layout_width="match_parent"
@@ -568,6 +567,180 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/checkbox_fresh_holes_trap_yes"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@color/colorDivider" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/disinsection_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fresh_holes_layout">
+
+                    <TextView
+                        android:id="@+id/title_disinsection_trap"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="20dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="Проведена дезинсекция ?"
+                        android:textAllCaps="true"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_disinsection_trap_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="да"
+                        android:textAllCaps="true"
+                        app:layout_constraintStart_toStartOf="@id/title_disinsection_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_disinsection_trap" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_disinsection_trap_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="нет"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="@id/title_disinsection_trap"
+                        app:layout_constraintTop_toBottomOf="@+id/title_disinsection_trap" />
+
+                    <RelativeLayout
+                        android:id="@+id/area_relative"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_disinsection_trap_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_disinsection_trap_no">
+
+                        <TextView
+                            android:id="@+id/area_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Участок"
+                            android:textColor="@color/fieldName"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/area_editText_link"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/area_textview"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/area_textview"
+                            android:backgroundTint="@android:color/transparent"
+                            android:hint="Выберете участок"
+                            android:textColor="@color/fieldData"
+                            android:textSize="15sp"
+                            android:theme="@style/CustomEdittext" />
+
+                        <ImageButton
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_alignEnd="@+id/city_divider"
+                            android:layout_alignBottom="@+id/area_textview"
+                            android:background="@drawable/ico_arrow_left"
+                            android:clickable="false"
+                            android:focusable="false" />
+
+                        <ImageView
+                            android:id="@+id/city_divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/area_editText_link"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/preparation_relative"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@id/area_relative"
+                        app:layout_constraintTop_toBottomOf="@+id/area_relative">
+
+                        <TextView
+                            android:id="@+id/preparation_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="12dp"
+                            android:text="Препарат"
+                            android:textColor="@color/fieldName"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/preparation_editText_link"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/preparation_textview"
+                            android:layout_marginStart="12dp"
+                            android:layout_toEndOf="@+id/preparation_textview"
+                            android:backgroundTint="@android:color/transparent"
+                            android:hint="Выберете препарат"
+                            android:textColor="@color/fieldData"
+                            android:textSize="15sp"
+                            android:theme="@style/CustomEdittext" />
+
+                        <ImageButton
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_alignEnd="@+id/preparation_divider"
+                            android:layout_alignBottom="@+id/preparation_textview"
+                            android:background="@drawable/ico_arrow_left"
+                            android:clickable="false"
+                            android:focusable="false" />
+
+                        <ImageView
+                            android:id="@+id/preparation_divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/preparation_editText_link"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="@color/colorDivider" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/disinsection_trap_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        app:layout_constraintStart_toStartOf="@id/checkbox_disinsection_trap_yes"
+                        app:layout_constraintTop_toBottomOf="@+id/checkbox_disinsection_trap_yes" />
+
+                    <EditText
+                        android:id="@+id/disinsection_trap_comments"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/my_edit_text_border"
+                        android:hint="Количество:"
+                        android:inputType="number"
+                        android:paddingStart="10dp"
+                        app:layout_constraintStart_toStartOf="@id/preparation_relative"
+                        app:layout_constraintTop_toBottomOf="@+id/preparation_relative" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/checkbox_disinsection_trap_yes"
                         android:layout_marginStart="13dp"
                         android:layout_marginEnd="24dp"
                         android:background="@color/colorDivider" />

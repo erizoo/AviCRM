@@ -28,4 +28,8 @@ public interface ProfileMvpView extends MvpView {
     void getActions(List<ResponseHandBook> responseHandBooks);
 
     void getAllPets(List<ResponseHandBook> responseHandBooks);
+
+    void getPreparationForAdditiional(List<ResponseHandBook> responseHandBooks);
+
+    void getAreas(List<ResponseHandBook> responseHandBooks);
 }

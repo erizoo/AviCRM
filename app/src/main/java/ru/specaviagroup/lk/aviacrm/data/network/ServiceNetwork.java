@@ -37,4 +37,6 @@ public interface ServiceNetwork {
     Observable<List<ResponseHandBook>> getActions(String userToken);
 
     Observable<List<ResponseHandBook>> getAllPets(String userToken);
+
+    Observable<List<ResponseHandBook>> getAreas(String s, int id);
 }

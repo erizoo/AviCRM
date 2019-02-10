@@ -70,5 +70,11 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="CustomEdittext" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlNormal">@color/colorAccentTextGray</item>
+        <item name="colorControlActivated">#161a1a</item>
+        <item name="colorControlHighlight">#161a1a</item>
+    </style>
+
     <color name="colorWhite">#FFFFFF</color>
 </resources>

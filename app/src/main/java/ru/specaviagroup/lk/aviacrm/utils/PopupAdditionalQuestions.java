@@ -40,6 +40,11 @@ public class PopupAdditionalQuestions extends PopupWindow implements AdditionalQ
         recyclerView.setAdapter(additionalQuestionsAdapter);
         additionalQuestionsAdapter.setItems(responseHandBooks);
         EditText editText = popupView.findViewById(R.id.comments);
+        if (type.equals("DISINSECTION")){
+            editText.setVisibility(View.GONE);
+        } if (type.equals("DISINSECTION_AREA")){
+            editText.setVisibility(View.GONE);
+        }
         popupView.findViewById(R.id.popup_save_button).setOnClickListener(v -> {
             callback.saveAdditionalQuestions(actions, type, editText.getText().toString());
             dismiss();

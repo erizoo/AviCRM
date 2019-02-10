@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,6 +36,7 @@ import ru.specaviagroup.lk.aviacrm.ui.base.BaseActivity;
 import ru.specaviagroup.lk.aviacrm.utils.PopupActions;
 import ru.specaviagroup.lk.aviacrm.utils.PopupAdditionalQuestions;
 import ru.specaviagroup.lk.aviacrm.utils.PopupDetailInsect;
+import ru.specaviagroup.lk.aviacrm.utils.PopupDisinsection;
 import ru.specaviagroup.lk.aviacrm.utils.PopupFlyControlActive;
 import ru.specaviagroup.lk.aviacrm.utils.PopupHandBook;
 import ru.specaviagroup.lk.aviacrm.utils.PopupVscActive;
@@ -162,6 +165,10 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     CheckBox checkBoxFreshHolesTrapYes;
     @BindView(R.id.checkbox_fresh_holes_trap_no)
     CheckBox checkBoxFreshHolesTrapNo;
+    @BindView(R.id.checkbox_disinsection_trap_yes)
+    CheckBox checkBoxDisinsectionTrapYes;
+    @BindView(R.id.checkbox_disinsection_trap_no)
+    CheckBox checkBoxDisinsectionTrapNo;
 
     @BindView(R.id.dead_pests_value)
     TextView deadPestsValue;
@@ -183,6 +190,19 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     TextView complaintsValue;
     @BindView(R.id.complaints_comments)
     TextView complaintsComments;
+    @BindView(R.id.disinsection_trap_value)
+    TextView disinsectionValue;
+
+    @BindView(R.id.area_relative)
+    RelativeLayout areaRelative;
+    @BindView(R.id.preparation_relative)
+    RelativeLayout preparationRelative;
+    @BindView(R.id.preparation_editText_link)
+    TextView preparationValueDisinsaction;
+    @BindView(R.id.area_editText_link)
+    TextView areaValueDisinsaction;
+    @BindView(R.id.disinsection_trap_comments)
+    EditText disinsectionTrapComments;
 
 
     @Inject
@@ -245,7 +265,6 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         popupWindow.setUp(contentView, responseHandBooks, type);
     }
 
-
     public void showPopupVscActive(View contentView) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_vsc_active, null);
         PopupVscActive popupWindow = new PopupVscActive(
@@ -266,6 +285,14 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         popupWindow.setUp(contentView, responseHandBooks, b);
     }
 
+    public void showPopupDisinsection(View contentView) {
+        @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_disinsection, null);
+        PopupDisinsection popupWindow = new PopupDisinsection(
+                popupView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setUp(contentView, ProfileActivity.this);
+    }
 
     public void showPopupHandBook(View contentView, List<ResponseHandBook> responseHandBook) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_handbook, null);
@@ -330,7 +357,6 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     @Override
     public void getPreparation(List<ResponseHandBook> responseHandBook) {
         showPopupHandBook(firstLayoutValue, responseHandBook);
-
     }
 
     @Override
@@ -350,6 +376,16 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @Override
     public void getAllPets(List<ResponseHandBook> responseHandBooks) {
+        showPopupAdditionalQuestions(layout, responseHandBooks, type);
+    }
+
+    @Override
+    public void getPreparationForAdditiional(List<ResponseHandBook> responseHandBooks) {
+        showPopupAdditionalQuestions(layout, responseHandBooks, type);
+    }
+
+    @Override
+    public void getAreas(List<ResponseHandBook> responseHandBooks) {
         showPopupAdditionalQuestions(layout, responseHandBooks, type);
     }
 
@@ -746,6 +782,42 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         }
     }
 
+    @OnClick(R.id.checkbox_disinsection_trap_yes)
+    public void clickCheckBoxDisinsectionTrapYes() {
+        areaRelative.setVisibility(View.VISIBLE);
+        preparationRelative.setVisibility(View.VISIBLE);
+        disinsectionTrapComments.setVisibility(View.VISIBLE);
+        if (checkBoxDisinsectionTrapNo.isChecked()) {
+            checkBoxDisinsectionTrapNo.setChecked(false);
+        } else {
+            checkBoxDisinsectionTrapYes.setChecked(true);
+        }
+    }
+
+
+    @OnClick(R.id.checkbox_disinsection_trap_no)
+    public void clickCheckBoxDisinsectionTrapNo() {
+        areaRelative.setVisibility(View.GONE);
+        preparationRelative.setVisibility(View.GONE);
+        disinsectionTrapComments.setVisibility(View.GONE);
+        if (checkBoxDisinsectionTrapYes.isChecked()) {
+            checkBoxDisinsectionTrapYes.setChecked(false);
+        } else {
+            checkBoxDisinsectionTrapNo.setChecked(true);
+        }
+    }
+
+    @OnClick(R.id.area_relative)
+    public void areaRelativeHandBook() {
+        type = "DISINSECTION_AREA";
+        presenter.getAreas(1);
+    }
+
+    @OnClick(R.id.preparation_relative)
+    public void preparationRelativeHandBook() {
+        type = "DISINSECTION";
+        presenter.getPreparationForAdditiional(1);
+    }
 
     @Override
     public void saveVscActive(String requestVscActive) {
@@ -826,6 +898,16 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
             }
             complaintsValue.setText(sb.toString());
             complaintsComments.setText(comments);
+        } else if (type.equals("DISINSECTION")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            preparationValueDisinsaction.setText(sb.toString());
+        } else if (type.equals("DISINSECTION_AREA")) {
+            for (ResponseHandBook items : responseHandBooks) {
+                sb.append(items.getId()).append(",");
+            }
+            areaValueDisinsaction.setText(sb.toString());
         }
     }
 }

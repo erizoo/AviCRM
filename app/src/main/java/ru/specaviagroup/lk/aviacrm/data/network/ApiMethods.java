@@ -13,10 +13,9 @@ import retrofit2.http.Query;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
-import ru.specaviagroup.lk.aviacrm.data.models.ResponseAction;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
-import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseSaveFlyActive;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseTrap;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
@@ -70,4 +69,8 @@ public interface ApiMethods {
 
     @GET("get-all-pest")
     Observable<List<ResponseHandBook>> getAllPets(@Header("Authorization") String userToken);
+
+    @GET("plots-rec/{id}")
+    Observable<List<ResponseHandBook>> getAreas(@Header("Authorization") String userToken,
+                                                @Path("id") int id);
 }

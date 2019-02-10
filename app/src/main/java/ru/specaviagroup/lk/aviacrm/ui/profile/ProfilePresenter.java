@@ -20,4 +20,8 @@ public interface ProfilePresenter <V extends ProfileMvpView> extends MvpPresente
     void getActions();
 
     void getAllPets();
+
+    void getPreparationForAdditiional(int i);
+
+    void getAreas(int i);
 }
