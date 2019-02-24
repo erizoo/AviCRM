@@ -6,6 +6,7 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.Response;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestAll;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseAction;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseInfo;
@@ -39,4 +40,6 @@ public interface ServiceNetwork {
     Observable<List<ResponseHandBook>> getAllPets(String userToken);
 
     Observable<List<ResponseHandBook>> getAreas(String s, int id);
+
+    Observable<Response<ResponseSaveFlyActive>> saveAll(String userToken, RequestAll requestAll, int id);
 }

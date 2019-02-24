@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.Response;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestAll;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseAction;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
@@ -103,5 +105,10 @@ public class ServiceNetworkImp implements ServiceNetwork {
     @Override
     public Observable<List<ResponseHandBook>> getAreas(String userToken, int id) {
         return apiMethods.getAreas(userToken, id);
+    }
+
+    @Override
+    public Observable<Response<ResponseSaveFlyActive>> saveAll(String userToken, RequestAll requestAll, int id) {
+        return apiMethods.saveAll(userToken, requestAll, id);
     }
 }

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.telecom.Call;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class PopupActions extends PopupWindow implements HandBookAdapterActions.
         super(contentView, width, height);
     }
 
-    public void setUp(View contentView, List<ResponseHandBook> responseHandBook) {
+    public void setUp(View contentView, List<ResponseHandBook> responseHandBook, String type) {
         setElevation(6.0f);
         setFocusable(false);
         setOutsideTouchable(false);
@@ -40,6 +41,10 @@ public class PopupActions extends PopupWindow implements HandBookAdapterActions.
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(handBookAdapterActions);
         handBookAdapterActions.setItems(responseHandBook);
+        if (type.equals("PREVENTIVE_ACTIONS")){
+            EditText comments = popupView.findViewById(R.id.comments);
+            comments.setVisibility(View.GONE);
+        }
         popupView.findViewById(R.id.popup_save_button).setOnClickListener(v -> {
             callback.saveActions(actions);
             dismiss();

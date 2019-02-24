@@ -2,6 +2,7 @@ package ru.specaviagroup.lk.aviacrm.data.network;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -12,6 +13,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
 import ru.specaviagroup.lk.aviacrm.data.models.CheckToken;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestAll;
 import ru.specaviagroup.lk.aviacrm.data.models.RequestLogin;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseFacility;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
@@ -73,4 +75,9 @@ public interface ApiMethods {
     @GET("plots-rec/{id}")
     Observable<List<ResponseHandBook>> getAreas(@Header("Authorization") String userToken,
                                                 @Path("id") int id);
+
+    @POST("worksheet/{id}")
+    Observable<Response<ResponseSaveFlyActive>> saveAll(@Header("Authorization") String userToken,
+                        @Body RequestAll requestAll,
+                        @Path("id") int objectId);
 }

@@ -23,9 +23,21 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.Response;
 import ru.specaviagroup.lk.aviacrm.R;
 import ru.specaviagroup.lk.aviacrm.data.ResponseModel.ResponsePoint;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestAll;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestPreventiveActions;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestQuestPersonal;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasAlivePests;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasBrokenTrap;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasDis;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasDisableTrap;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasHolePest;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasRemoveTrap;
+import ru.specaviagroup.lk.aviacrm.data.models.RequestWasTrashPests;
 import ru.specaviagroup.lk.aviacrm.data.models.ResponseHandBook;
+import ru.specaviagroup.lk.aviacrm.data.models.ResponseSaveFlyActive;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestBirdsActive;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyNeedRep;
@@ -126,9 +138,9 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     CheckBox checkBoxRodentsAndCrawlingReplacementGlueNo;
 
     @BindView(R.id.checkbox_preventive_actions_yes)
-    CheckBox checkBoxReventiveActionsYes;
+    CheckBox checkBoxPreventiveActionsYes;
     @BindView(R.id.checkbox_preventive_actions_no)
-    CheckBox checkBoxReventiveActionsNo;
+    CheckBox checkBoxPreventiveActionsNo;
     @BindView(R.id.preventive_actions_value)
     TextView preventiveActionsValue;
 
@@ -371,7 +383,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @Override
     public void getActions(List<ResponseHandBook> responseActions) {
-        showPopupHandBookActions(firstLayoutValue, responseActions);
+        showPopupHandBookActions(layout, responseActions, type);
     }
 
     @Override
@@ -389,14 +401,19 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         showPopupAdditionalQuestions(layout, responseHandBooks, type);
     }
 
-    private void showPopupHandBookActions(View contentView, List<ResponseHandBook> responseActions) {
+    @Override
+    public void getSavedAll(Response<ResponseSaveFlyActive> responseSaveFlyActiveResponse) {
+
+    }
+
+    private void showPopupHandBookActions(View contentView, List<ResponseHandBook> responseActions, String type) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_handbook, null);
         PopupActions popupWindow = new PopupActions(
                 popupView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 contentView.getHeight());
         popupWindow.setCallback(this);
-        popupWindow.setUp(contentView, responseActions);
+        popupWindow.setUp(contentView, responseActions, type);
     }
 
     @Override
@@ -657,6 +674,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     @OnClick(R.id.checkbox_complaints_no)
     public void checkBoxComplaintsNo() {
         complaintsValue.setText("");
+        complaintsComments.setText("");
         if (checkBoxComplaintsYes.isChecked()) {
             checkBoxComplaintsYes.setChecked(false);
         } else {
@@ -765,20 +783,22 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @OnClick(R.id.checkbox_preventive_actions_yes)
     public void clickCheckBoxPreventiveActionsYes() {
+        type = "PREVENTIVE_ACTIONS";
         presenter.getActions();
-        if (checkBoxReventiveActionsNo.isChecked()) {
-            checkBoxReventiveActionsNo.setChecked(false);
+        if (checkBoxPreventiveActionsNo.isChecked()) {
+            checkBoxPreventiveActionsNo.setChecked(false);
         } else {
-            checkBoxReventiveActionsYes.setChecked(true);
+            checkBoxPreventiveActionsYes.setChecked(true);
         }
     }
 
     @OnClick(R.id.checkbox_preventive_actions_no)
     public void clickCheckBoxreventiveActionsNo() {
-        if (checkBoxReventiveActionsYes.isChecked()) {
-            checkBoxReventiveActionsYes.setChecked(false);
+        preventiveActionsValue.setText("");
+        if (checkBoxPreventiveActionsYes.isChecked()) {
+            checkBoxPreventiveActionsYes.setChecked(false);
         } else {
-            checkBoxReventiveActionsNo.setChecked(true);
+            checkBoxPreventiveActionsNo.setChecked(true);
         }
     }
 
@@ -836,24 +856,91 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @OnClick(R.id.save_all)
     public void saveAll() {
+        RequestAll requestAll = new RequestAll();
         if (isFlyActive) {
             if (checkBoxActiveYes.isChecked()) {
                 RequestFlyActive requestFlyActive = new RequestFlyActive();
                 requestFlyActive.setId("1");
                 requestFlyActive.setAmount(valueFlyActive.getText().toString());
+                requestAll.setRequestFlyActive(requestFlyActive);
             }
             if (checkBoxPreparationYes.isChecked()) {
                 RequestGlutRepTrap requestGlutRepTrap = new RequestGlutRepTrap();
                 requestGlutRepTrap.setTraps("1");
                 String[] strings = preparationValue.getText().toString().split("=");
                 requestGlutRepTrap.setPesticideId(strings[1]);
+                requestAll.setRequestGlutRepTrap(requestGlutRepTrap);
             }
             if (!flyActiveComments.getText().toString().equals("")) {
                 RequestFlyNeedRep requestFlyNeedRep = new RequestFlyNeedRep();
                 requestFlyNeedRep.setTraps("1");
                 requestFlyNeedRep.setComment(flyActiveComments.getText().toString());
+                requestAll.setRequestFlyNeedRep(requestFlyNeedRep);
             }
         }
+        if (checkBoxPreventiveActionsYes.isChecked()) {
+            RequestPreventiveActions requestPreventiveActions = new RequestPreventiveActions();
+            requestPreventiveActions.setId(preventiveActionsValue.getText().toString());
+            requestAll.setRequestPreventiveAction(requestPreventiveActions);
+        }
+        if (checkBoxCleanTrapYes.isChecked()) {
+            RequestWasRemoveTrap requestWasRemoveTrap = new RequestWasRemoveTrap();
+            requestWasRemoveTrap.setTraps("1");
+            requestAll.setRequestWasRemoveTrap(requestWasRemoveTrap);
+        }
+        if (checkBoxBrokenTrapYes.isChecked()) {
+            RequestWasBrokenTrap requestWasBrokenTrap = new RequestWasBrokenTrap();
+            requestWasBrokenTrap.setTraps("1");
+            requestAll.setRequestWasBrokenTrap(requestWasBrokenTrap);
+        }
+        if (checkBoxUnavailableTrapYes.isChecked()) {
+            RequestWasDisableTrap requestWasDisableTrap = new RequestWasDisableTrap();
+            requestWasDisableTrap.setTraps("1");
+            requestAll.setRequestWasDisableTrap(requestWasDisableTrap);
+        }
+        if (checkBoxComplaintsYes.isChecked()) {
+            RequestQuestPersonal requestQuestPersonal = new RequestQuestPersonal();
+            requestQuestPersonal.setId("1");
+            requestQuestPersonal.setPestId(complaintsValue.getText().toString());
+            requestQuestPersonal.setComment(complaintsComments.getText().toString());
+            requestAll.setRequestQuestPersonal(requestQuestPersonal);
+        }
+//        if (checkBoxDeadPestsTrapYes.isChecked()) {
+//            RequestQuestPersonal requestQuestPersonal = new RequestQuestPersonal();
+//            requestQuestPersonal.setId(trapId);
+//            requestQuestPersonal.setPestId(complaintsValue.getText().toString());
+//            requestQuestPersonal.setComment(complaintsComments.getText().toString());
+//        }
+        if (checkLivePestsTrapYes.isChecked()) {
+            RequestWasAlivePests requestWasAlivePests = new RequestWasAlivePests();
+            requestWasAlivePests.setId("1");
+            requestWasAlivePests.setPestId(livePestsValue.getText().toString());
+            requestWasAlivePests.setComment(livePestsComments.getText().toString());
+            requestAll.setRequestWasAlivePests(requestWasAlivePests);
+        }
+        if (checkBoxLifeActivityTrapYes.isChecked()) {
+            RequestWasTrashPests requestWasTrashPests = new RequestWasTrashPests();
+            requestWasTrashPests.setId("1");
+            requestWasTrashPests.setPestId(lifeActivityValue.getText().toString());
+            requestWasTrashPests.setComment(lifeActivityComments.getText().toString());
+            requestAll.setRequestWasTrashPests(requestWasTrashPests);
+        }
+        if (checkBoxFreshHolesTrapYes.isChecked()) {
+            RequestWasHolePest requestWasHolePest = new RequestWasHolePest();
+            requestWasHolePest.setId("1");
+            requestWasHolePest.setPestId(freshHolesValue.getText().toString());
+            requestWasHolePest.setComment(freshHolesComments.getText().toString());
+            requestAll.setRequestWasHolePest(requestWasHolePest);
+        }
+        if (checkBoxDisinsectionTrapYes.isChecked()) {
+            RequestWasDis requestWasDis = new RequestWasDis();
+            requestWasDis.setBoxId(areaValueDisinsaction.getText().toString());
+            requestWasDis.setPesticideId(preparationValueDisinsaction.getText().toString());
+            requestWasDis.setCount(disinsectionTrapComments.getText().toString());
+            requestAll.setRequestWasDis(requestWasDis);
+        }
+        presenter.saveAll(requestAll, 1);
+        System.out.println(requestAll);
     }
 
     @Override

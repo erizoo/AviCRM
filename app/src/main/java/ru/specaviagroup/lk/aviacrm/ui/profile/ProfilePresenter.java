@@ -1,5 +1,6 @@
 package ru.specaviagroup.lk.aviacrm.ui.profile;
 
+import ru.specaviagroup.lk.aviacrm.data.models.RequestAll;
 import ru.specaviagroup.lk.aviacrm.data.request.RequestFlyActive;
 import ru.specaviagroup.lk.aviacrm.ui.base.MvpPresenter;
 
@@ -24,4 +25,6 @@ public interface ProfilePresenter <V extends ProfileMvpView> extends MvpPresente
     void getPreparationForAdditiional(int i);
 
     void getAreas(int i);
+
+    void saveAll(RequestAll requestAll, int id);
 }
