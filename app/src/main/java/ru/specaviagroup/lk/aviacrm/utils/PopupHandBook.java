@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class PopupHandBook extends PopupWindow implements HandBookAdapter.Callba
         super(contentView, width, height);
     }
 
-    public void setUp(View contentView, List<ResponseHandBook> responseHandBook) {
+    public void setUp(View contentView, List<ResponseHandBook> responseHandBook, boolean isComments) {
         setElevation(6.0f);
         setFocusable(false);
         setOutsideTouchable(false);
@@ -39,6 +40,10 @@ public class PopupHandBook extends PopupWindow implements HandBookAdapter.Callba
         recyclerView.setAdapter(handBookAdapter);
         handBookAdapter.setItems(responseHandBook);
         handBookAdapter.setCallback(this);
+        EditText comments = popupView.findViewById(R.id.comments);
+        if (!isComments){
+            comments.setVisibility(View.GONE);
+        }
         popupView.findViewById(R.id.popup_save_button).setOnClickListener(v -> {
             if (handBook != null){
                 callback.savePreparation(handBook);

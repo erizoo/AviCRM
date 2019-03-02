@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="29dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/panel_inactive"
+    android:elevation="4dp"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/save_popup_button"
+            style="@style/AppTheme.Button.Popup"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_green"
+            android:layout_marginTop="20dp"
+            android:text="@string/save"
+            app:layout_constraintTop_toBottomOf="@+id/tarakan" />
+
+        <Button
+            android:id="@+id/abort_popup_button"
+            style="@style/AppTheme.Button.Popup"
+            android:layout_width="match_parent"
+            android:background="@drawable/button_blue"
+            android:layout_marginTop="20dp"
+            android:text="@string/abort"
+            app:layout_constraintTop_toBottomOf="@+id/save_popup_button" />
+
+        <TextView
+            android:id="@+id/midges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Крыса"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/flies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Мышь"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/midges" />
+
+        <TextView
+            android:id="@+id/gold_eyed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Землеройка"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flies" />
+
+        <TextView
+            android:id="@+id/mosquitoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Муравьи"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gold_eyed" />
+
+        <TextView
+            android:id="@+id/wasps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Мокрицы"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mosquitoes" />
+
+        <TextView
+            android:id="@+id/food_moth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Пауки"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wasps" />
+
+        <TextView
+            android:id="@+id/tarakan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Тараканы"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/food_moth" />
+
+        <EditText
+            android:id="@+id/midges_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/midges"
+            app:layout_constraintTop_toTopOf="@+id/midges" />
+
+        <EditText
+            android:id="@+id/flies_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/flies"
+            app:layout_constraintTop_toTopOf="@+id/flies" />
+
+        <EditText
+            android:id="@+id/gold_eyed_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/gold_eyed"
+            app:layout_constraintTop_toTopOf="@+id/gold_eyed"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/mosquitoes_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/mosquitoes"
+            app:layout_constraintTop_toTopOf="@+id/mosquitoes"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/wasps_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/wasps"
+            app:layout_constraintTop_toTopOf="@+id/wasps"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/food_moth_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/food_moth"
+            app:layout_constraintTop_toTopOf="@+id/food_moth"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/tarakan_value"
+            style="@style/AppTheme.EditText.Profile"
+            android:hint="0"
+            app:layout_constraintStart_toEndOf="@id/tarakan"
+            app:layout_constraintTop_toTopOf="@+id/tarakan"
+            tools:ignore="MissingConstraints" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

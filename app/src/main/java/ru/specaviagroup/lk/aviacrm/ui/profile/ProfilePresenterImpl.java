@@ -12,6 +12,7 @@ import ru.specaviagroup.lk.aviacrm.ui.base.BasePresenter;
 
 public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresenter<V>
         implements ProfilePresenter<V> {
+    public static final String TOKEN = "Bearer 7094b7d5bf8d45600252c84c33124e865f5e8a11";
 
     @Inject
     public ProfilePresenterImpl(RepositoryManager repositoryManager, CompositeDisposable compositeDisposable) {
@@ -21,7 +22,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getView(Integer objectId) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getView("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", objectId)
+                getRepositoryManager().getServiceNetwork().getView(TOKEN, objectId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -34,7 +35,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getPoints(Integer objectId) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getPoints("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", objectId)
+                getRepositoryManager().getServiceNetwork().getPoints(TOKEN, objectId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -47,7 +48,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void saveFlyActive(RequestFlyActive requestFlyActive, int objectId) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().saveFlyActive("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339",
+                getRepositoryManager().getServiceNetwork().saveFlyActive(TOKEN,
                         requestFlyActive, objectId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -66,7 +67,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getPreparation(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getPreparation("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", id)
+                getRepositoryManager().getServiceNetwork().getPreparation(TOKEN, id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -80,7 +81,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getObjects(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getObjects("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", id)
+                getRepositoryManager().getServiceNetwork().getObjects(TOKEN, id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -94,7 +95,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getObjectsCatching(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getObjects("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", id)
+                getRepositoryManager().getServiceNetwork().getObjects(TOKEN, id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -108,7 +109,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getActions() {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getActions("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339")
+                getRepositoryManager().getServiceNetwork().getActions(TOKEN)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -122,7 +123,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getAllPets() {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getAllPets("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339")
+                getRepositoryManager().getServiceNetwork().getAllPets(TOKEN)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -136,7 +137,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getPreparationForAdditiional(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getPreparation("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", id)
+                getRepositoryManager().getServiceNetwork().getPreparation(TOKEN, id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -150,7 +151,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void getAreas(int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().getAreas("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", id)
+                getRepositoryManager().getServiceNetwork().getAreas(TOKEN, id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -164,7 +165,7 @@ public class ProfilePresenterImpl<V extends ProfileMvpView> extends BasePresente
     @Override
     public void saveAll(RequestAll requestAll, int id) {
         getCompositeDisposable().add(
-                getRepositoryManager().getServiceNetwork().saveAll("Bearer e5b11409f80a4dfa7fe17e56519ce6bde6709339", requestAll, id)
+                getRepositoryManager().getServiceNetwork().saveAll(TOKEN, requestAll, id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(

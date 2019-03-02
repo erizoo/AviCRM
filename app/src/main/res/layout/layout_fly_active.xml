@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Коментарий"
+            android:text="Требуетя ремонт ?"
             app:layout_constraintBottom_toTopOf="@+id/comments_fly_active"
             app:layout_constraintStart_toStartOf="@+id/comments_fly_active"
             app:layout_constraintTop_toBottomOf="@+id/title_layout" />

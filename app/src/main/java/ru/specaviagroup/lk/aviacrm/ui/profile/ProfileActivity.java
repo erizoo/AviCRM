@@ -49,12 +49,13 @@ import ru.specaviagroup.lk.aviacrm.utils.PopupActions;
 import ru.specaviagroup.lk.aviacrm.utils.PopupAdditionalQuestions;
 import ru.specaviagroup.lk.aviacrm.utils.PopupDetailInsect;
 import ru.specaviagroup.lk.aviacrm.utils.PopupDisinsection;
+import ru.specaviagroup.lk.aviacrm.utils.PopupFlat;
 import ru.specaviagroup.lk.aviacrm.utils.PopupFlyControlActive;
 import ru.specaviagroup.lk.aviacrm.utils.PopupHandBook;
 import ru.specaviagroup.lk.aviacrm.utils.PopupVscActive;
 
 public class ProfileActivity extends BaseActivity implements ProfileMvpView, PopupDetailInsect.Callback, PopupHandBook.Callback,
-        PopupVscActive.Callback, PopupFlyControlActive.CallbackPopupFlyControl, PopupActions.Callback, PopupAdditionalQuestions.Callback {
+        PopupVscActive.Callback, PopupFlyControlActive.CallbackPopupFlyControl, PopupActions.Callback, PopupAdditionalQuestions.Callback, PopupFlat.Callback {
 
     @BindView(R.id.title_first)
     Button titleFirst;
@@ -230,6 +231,8 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     private RequestBirdsCatching requestBirdsCatching;
     private boolean isFlyActive = false;
     private String type = "";
+    private boolean isComments = false;
+    private boolean isFly = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -298,6 +301,17 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         popupWindow.setUp(contentView, responseHandBooks, b);
     }
 
+    private void showPopupFlat(View contentView) {
+        @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_flat, null);
+        PopupFlat popupWindow = new PopupFlat(
+                popupView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setCallback(this);
+        popupWindow.setUp(contentView);
+    }
+
     public void showPopupDisinsection(View contentView) {
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_disinsection, null);
         PopupDisinsection popupWindow = new PopupDisinsection(
@@ -314,16 +328,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setCallback(this);
-        popupWindow.setUp(contentView, responseHandBook);
-    }
-
-    @OnClick(R.id.title_first)
-    public void showFirstLayout() {
-        if (firstLayoutValue.getVisibility() == View.VISIBLE) {
-            firstLayoutValue.setVisibility(View.GONE);
-        } else {
-            firstLayoutValue.setVisibility(View.VISIBLE);
-        }
+        popupWindow.setUp(contentView, responseHandBook, isComments);
     }
 
     @Override
@@ -341,6 +346,12 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
             }
             if (items.equals("havePog,beReaload")) {
                 streetAreaLayout.setVisibility(View.VISIBLE);
+            }
+            if (items.equals("vxActive,vxGluReload,vxFerReload")){
+                findViewById(R.id.vcs_control_layout).setVisibility(View.VISIBLE);
+            }
+            if (items.equals("flyControlActive,flyControlTrapp")){
+                findViewById(R.id.fly_control_layout).setVisibility(View.VISIBLE);
             }
         }
         System.out.println();
@@ -423,6 +434,12 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     }
 
     @Override
+    public void saveFly(String requestFlyActive) {
+        TextView textView = findViewById(R.id.value_rodents_and_crawling_catching);
+        textView.setText(requestFlyActive);
+    }
+
+    @Override
     public void abort() {
         checkBoxActiveNo.setChecked(true);
         checkBoxActiveYes.setChecked(false);
@@ -431,6 +448,10 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     @SuppressLint("SetTextI18n")
     @Override
     public void savePreparation(ResponseHandBook responseHandBook) {
+        if (isFly){
+            preparationValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
+            isFly = false;
+        }
         if (isStreetArea) {
             baitReplacementValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
             isStreetArea = false;
@@ -447,14 +468,6 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
             vcsControlActiveValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
             isVscControlActive = false;
         }
-
-        try {
-            preparationValue.setText(responseHandBook.getPoint() + "=" + responseHandBook.getId());
-        } catch (NullPointerException e) {
-            Snackbar.make(firstLayoutValue, "Выберете значение", Snackbar.LENGTH_LONG).show();
-        }
-
-
     }
 
     @OnClick(R.id.plus_fly_control_active)
@@ -485,6 +498,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @OnClick(R.id.checkbox_preparation_yes)
     public void clickCheckboxPreparationYes() {
+        isFly = true;
         presenter.getPreparation(5);
         if (checkBoxPreparationNo.isChecked()) {
             checkBoxPreparationNo.setChecked(false);
@@ -516,6 +530,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
     @OnClick(R.id.checkbox_bait_replacement_yes)
     public void clickCheckboxBaitReplacementYes() {
         isStreetArea = true;
+        isComments = false;
         presenter.getPreparation(5);
         checkBoxBaitReplacementNo.setChecked(false);
     }
@@ -603,6 +618,7 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
 
     @OnClick(R.id.checkbox_rodents_and_crawling_catching_yes)
     public void clickCheckboxRodentsAndCrawlingCatchingYes() {
+        showPopupFlat(layout);
         checkBoxRodentsAndCrawlingCatchingNo.setChecked(false);
     }
 
