@@ -282,8 +282,9 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         PopupVscActive popupWindow = new PopupVscActive(
                 popupView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setCallback(this);
+        popupWindow.setFocusable(true);
         popupWindow.setUp(contentView);
     }
 
@@ -310,8 +311,8 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         @SuppressLint("InflateParams") View popupView = getLayoutInflater().inflate(R.layout.popup_handbook, null);
         PopupHandBook popupWindow = new PopupHandBook(
                 popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setCallback(this);
         popupWindow.setUp(contentView, responseHandBook);
     }
@@ -880,7 +881,12 @@ public class ProfileActivity extends BaseActivity implements ProfileMvpView, Pop
         }
         if (checkBoxPreventiveActionsYes.isChecked()) {
             RequestPreventiveActions requestPreventiveActions = new RequestPreventiveActions();
-            requestPreventiveActions.setId(preventiveActionsValue.getText().toString());
+            String result = preventiveActionsValue.getText().toString();
+            if (result.endsWith(",")) {
+                requestPreventiveActions.setId(result.substring(0, result.length() - 1));
+            } else {
+                requestPreventiveActions.setId(result);
+            }
             requestAll.setRequestPreventiveAction(requestPreventiveActions);
         }
         if (checkBoxCleanTrapYes.isChecked()) {

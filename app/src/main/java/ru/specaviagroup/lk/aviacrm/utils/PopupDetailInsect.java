@@ -18,7 +18,7 @@ public class PopupDetailInsect extends PopupWindow {
 
     public void setUp(View contentView) {
         setElevation(6.0f);
-        setFocusable(false);
+        setFocusable(true);
         setOutsideTouchable(false);
         showAtLocation(contentView, Gravity.CENTER, 0, 0);
         View popupView = getContentView();
